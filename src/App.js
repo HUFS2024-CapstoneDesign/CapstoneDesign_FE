@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import health from './modules/health.js';
+import { Provider } from 'react-redux'
+import { legacy_createStore as createStore} from "redux";
+import { devToolsEnhancer } from 'redux-devtools-extension'
+import { ThemeProvider } from 'styled-components';
+import theme from './global/theme.js';
+import router from './routes/router.js';
+import GlobalStyle from './global/global.js';
+import { RouterProvider } from 'react-router';
 
+
+const store = createStore(health, devToolsEnhancer())
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router}/>
+      <GlobalStyle />
+    </ThemeProvider>
+  </Provider>
+  </>
   );
 }
 
