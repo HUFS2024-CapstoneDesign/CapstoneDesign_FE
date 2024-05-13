@@ -4,7 +4,7 @@ theme.PALETTE = {
   primary : {
     main : '#FFB74D',
     main_soft :'#FCC7A1',
-    main_deep : '##FF7816'
+    main_deep : '#FF7816'
   },
   sub :{
     sub : '#81D4FA',
