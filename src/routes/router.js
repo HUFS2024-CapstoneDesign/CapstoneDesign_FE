@@ -13,8 +13,13 @@ import Mypage from "../pages/myPage/Mypage.js";
 import Upload from "../pages/upLoad/Upload.js";
 import DiseaseResult from "../pages/result/DiseaseResult.js";
 import HosipitalRecommend from "../pages/result/HosipitalRecommend.js";
+import Layout from "../pages/layout/Layout.js";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
   {
     path: "/",
     element: <Main />
@@ -26,10 +31,6 @@ const router = createBrowserRouter([
   {
     path : "/signUp",
     element : <SignUp />
-  },
-  {
-    path : "/signUpFinish" ,
-    element : <SignUpFinish />
   },
   {
     path : "/login" ,
@@ -66,6 +67,11 @@ const router = createBrowserRouter([
   {
     path : "/hospitalReccomend" ,
     element : <HosipitalRecommend/>
+  }
+  ]},
+  {
+    path : "/signUpFinish" ,
+    element : <SignUpFinish />
   },
   {
     path: "*",
