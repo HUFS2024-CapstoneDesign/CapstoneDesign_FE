@@ -69,6 +69,7 @@ const router = createBrowserRouter([
     element : <HosipitalRecommend/>
   }
   ]},
+  
   {
     path : "/signUpFinish" ,
     element : <SignUpFinish />

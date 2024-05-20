@@ -1,7 +1,8 @@
 import React from 'react';
 import S from './style.js'
 import { NavLink } from 'react-router-dom';
-import logo from '../../global/logo/logo.png'
+import logo from '../../global/logo/logo.png';
+import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
@@ -9,6 +10,7 @@ const Layout = () => {
       <NavLink to={"/"}>
         <S.Image src={logo} />
       </NavLink>
+      <Outlet />
     </S.Background>
   );
 };
