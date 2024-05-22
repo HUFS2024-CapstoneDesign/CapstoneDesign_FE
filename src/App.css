@@ -36,3 +36,70 @@
     transform: rotate(360deg);
   }
 }
+
+/* MainPage */
+#MainWrapper {
+  width: 1440px;
+  height: 1024px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 253, 0) 0%, rgba(255, 148, 70, 0.77824) 97.28%, rgba(255, 145, 64, 0.8) 100%), #ffffff;
+  background-size: 1440px 1024px;
+  border: 0px;
+}
+
+#MainWrapper #defaultProfile {
+  position: absolute;
+  width: 79px;
+  height: 79px;
+  right: 29px;
+  top: 20px;
+}
+
+#MainWrapper #introTextWrapper {
+  position: absolute;
+  width: 814px;
+  height: 288px;
+  left: 111px;
+  top: 197px;
+}
+#MainWrapper p {
+  /* “캣치헬스는 반려동물에게 흔히 발생하는 ㅇㅇㅇ,xxx등의 질병을 사진 한장의 업로드를 통하여 신속히 진단하고, 해당 질병의 예상되는 진료비와 바로 접근 가능한 병원의 정보를  제공하는 서비스입니다. 불필요한 병원 내원으로 인한 비용 발생을 줄이고 효과적으로 진단받아 내가 아끼는 동물이 더이상 고통받지 않게 해주세요 !” */
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 48px;
+  /* or 185% */
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+
+#MainWrapper #startButton {
+  position: absolute;
+  width: 247px;
+  height: 81px;
+  left: 119px;
+  top: 536px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+  /* 시작하기  */
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 28px;
+
+  color: #ffffff;
+}
+
+#MainWrapper #catTower {
+  position: absolute;
+  width: 451px;
+  height: 741px;
+  left: 927px;
+  top: 283px;
+}
