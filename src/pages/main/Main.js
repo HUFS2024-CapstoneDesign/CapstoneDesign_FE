@@ -3,12 +3,15 @@ import catTower from "./catTower.png";
 import defaultProfile from "./defaultProfile.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 export default function Main() {
   const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleClick = () => {
-    navigate("/inputInfo");
+    if (loggedIn === true) navigate("/inputInfo");
+    else alert("먼저 로그인을 해주세요 !");
+    navigate("/login");
   };
 
   return (
