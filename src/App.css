@@ -245,3 +245,94 @@
   font-size: 32px;
   line-height: 39px;
 }
+
+/* MainInputInfo Mobile */
+#MobileMainInputInfoWrapper {
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+#MobileMainInputInfoWrapper #mobileDefaultProfile {
+  position: absolute;
+  width: 50%;
+  height: 30px;
+  left: 320px;
+  top: 19px;
+}
+#MobileMainInputInfoWrapper #h1Wrapper {
+  position: absolute;
+  width: 340px;
+  height: 29px;
+  left: calc(25% - 340px / 2 + 124.5px);
+  top: 175px;
+}
+#MobileMainInputInfoWrapper h1 {
+  /* 애완동물의 이름을 입력해 주세요. */
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #000000;
+}
+
+#MobileMainInputInfoWrapper #nameInput {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 281px;
+  height: 86px;
+  left: calc(50% - 281px / 2);
+  top: 216px;
+
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 50px;
+}
+
+#MobileMainInputInfoWrapper #nameInput[type="text"]::placeholder {
+  /* 이름을 입력해주세요 */
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #bfbfbf;
+}
+#MobileMainInputInfoWrapper #nameInput[type="text"] {
+  padding-left: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+#MobileMainInputInfoWrapper p {
+  /* 이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요 ! */
+  position: absolute;
+  width: 361px;
+  height: 26px;
+  left: calc(25% - 361px / 2 + 120px);
+  top: 310px;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #000000;
+}
+#MobileMainInputInfoWrapper #diagnoseButton {
+  position: absolute;
+  width: 194px;
+  height: 63.62px;
+  left: calc(50% - 194px / 2 - 0.5px);
+  top: 426px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  /* 진단받기 */
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+  border: 0px;
+}
