@@ -22,7 +22,7 @@ export default function Main() {
           내원으로 인한 비용 발생을 줄이고 효과적으로 진단받아<br></br> 내가 아끼는 동물이 더이상 고통받지 않게 해주세요 !”
         </p>
       </div>
-      <button onclick={handleClick} id="startButton">
+      <button onClick={handleClick} id="startButton">
         시작하기
       </button>
       <img src={catTower} alt="catTower" id="catTower" />

@@ -41,18 +41,10 @@
 #MainWrapper {
   width: 1440px;
   height: 1024px;
-
+  overflow: hidden;
   background: linear-gradient(180deg, rgba(255, 255, 253, 0) 0%, rgba(255, 148, 70, 0.77824) 97.28%, rgba(255, 145, 64, 0.8) 100%), #ffffff;
   background-size: 1440px 1024px;
   border: 0px;
-}
-
-#MainWrapper #defaultProfile {
-  position: absolute;
-  width: 79px;
-  height: 79px;
-  right: 29px;
-  top: 20px;
 }
 
 #MainWrapper #introTextWrapper {
@@ -78,6 +70,7 @@
 
 #MainWrapper #startButton {
   position: absolute;
+
   width: 247px;
   height: 81px;
   left: 119px;
@@ -99,7 +92,105 @@
 #MainWrapper #catTower {
   position: absolute;
   width: 451px;
-  height: 741px;
+  height: auto;
   left: 927px;
   top: 283px;
+}
+
+#defaultProfile {
+  position: absolute;
+  width: 79px;
+  height: 79px;
+  right: 29px;
+  top: 20px;
+}
+
+/*메인페이지- 이름 입력*/
+#MainInputInfoWrapper {
+  width: 1440px;
+  height: 1024px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 253, 0) 0%, rgba(255, 148, 70, 0.77824) 97.28%, rgba(255, 145, 64, 0.8) 100%), #ffffff;
+  background-size: 1440px 1024px;
+  border: 0px;
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#MainInputInfoWrapper h1 {
+  /* 애완동물의 이름을 입력해 주세요. */
+
+  position: absolute;
+  width: 703px;
+  height: 167px;
+  left: 369px;
+  top: 264px;
+
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+#MainInputInfoWrapper p {
+  /* 이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요 ! */
+  position: absolute;
+  width: 732px;
+  height: 85px;
+  left: 354px;
+  top: 483px;
+
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #000000;
+}
+#MainInputInfoWrapper #diagnoseButton {
+  position: absolute;
+  width: 265.92px;
+  height: 87.2px;
+  left: 587px;
+  top: 650px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  /* 진단받기 */
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 31px;
+
+  color: #ffffff;
+}
+
+#MainInputInfoWrapper #nameInput {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 768px;
+  height: 115px;
+  left: 336px;
+  top: 345px;
+
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 50px;
+}
+
+#MainInputInfoWrapper #nameInput[type="text"]::placeholder {
+  /* 이름을 입력해주세요 */
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  color: #bfbfbf;
+}
+#MainInputInfoWrapper #nameInput[type="text"] {
+  padding-left: 32px;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
 }
