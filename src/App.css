@@ -37,7 +37,7 @@
   }
 }
 
-/* MainPage */
+/* MainPage desktop*/
 #MainWrapper {
   width: 1440px;
   height: 1024px;
@@ -97,7 +97,7 @@
   top: 283px;
 }
 
-#defaultProfile {
+#MainWrapper #defaultProfile {
   position: absolute;
   width: 79px;
   height: 79px;
@@ -105,7 +105,58 @@
   top: 20px;
 }
 
-/*메인페이지- 이름 입력*/
+/* Main page mobile */
+#MobileMainWrapper #introTextWrapper {
+  position: absolute;
+  width: 334px;
+  height: 306px;
+  left: calc(50% - 334px / 2 - 0.5px);
+  top: 126px;
+}
+#MobileMainWrapper p {
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+#MobileMainWrapper #mobileDefaultProfile {
+  position: absolute;
+  width: 50%;
+  height: 30px;
+  left: 320px;
+  top: 19px;
+}
+#MobileMainWrapper #startButton {
+  position: absolute;
+  width: 194px;
+  height: 63.62px;
+  left: calc(50% - 194px / 2 - 0.5px);
+  top: 475px;
+
+  background: #ff7816;
+  border-radius: 50px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  border: 0px;
+
+  color: #ffffff;
+}
+#MobileMainWrapper #cat {
+  position: absolute;
+  width: 168px;
+  height: 158px;
+  left: 225px;
+  top: 598px;
+}
+
+/*MainInput page*/
 #MainInputInfoWrapper {
   width: 1440px;
   height: 1024px;
