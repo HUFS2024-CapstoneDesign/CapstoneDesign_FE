@@ -20,65 +20,65 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-  {
-    path: "/",
-    element: <Main />
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "/inputInfo",
+        element: <MainInputInfo />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/searchId",
+        element: <SearchId />,
+      },
+      {
+        path: "/searchIdFinish",
+        element: <SearchIdfinish />,
+      },
+      {
+        path: "/identification",
+        element: <Identification />,
+      },
+      {
+        path: "/changePassword",
+        element: <ChangePassword />,
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />,
+      },
+      {
+        path: "/upload",
+        element: <Upload />,
+      },
+      {
+        path: "/diseaseResult",
+        element: <DiseaseResult />,
+      },
+      {
+        path: "/hospitalRecommend",
+        element: <HosipitalRecommend />,
+      },
+    ],
   },
+
   {
-    path : "/inputInfo",
-    element : <MainInputInfo />
-  },
-  {
-    path : "/signUp",
-    element : <SignUp />
-  },
-  {
-    path : "/login" ,
-    element : <Login/>
-  },
-  {
-    path : "/searchId" ,
-    element : <SearchId />
-  },
-  {
-    path : "/searchIdFinish",
-    element : <SearchIdfinish />
-  },
-  {
-    path : "/identification" ,
-    element : <Identification />
-  },
-  {
-    path : "/changePassword" ,
-    element : <ChangePassword />
-  },
-  {
-    path : "/mypage" ,
-    element : <Mypage />
-  },
-  {
-    path : "/upload" ,
-    element : <Upload />
-  },
-  {
-    path : "/diseaseResult" ,
-    element : <DiseaseResult />
-  },
-  {
-    path : "/hospitalReccomend" ,
-    element : <HosipitalRecommend/>
-  }
-  ]},
-  
-  {
-    path : "/signUpFinish" ,
-    element : <SignUpFinish />
+    path: "/signUpFinish",
+    element: <SignUpFinish />,
   },
   {
     path: "*",
-    element: <NotFound />
-  }
+    element: <NotFound />,
+  },
 ]);
-
 
 export default router;

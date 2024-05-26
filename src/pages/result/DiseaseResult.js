@@ -2,18 +2,51 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import cryCat from "./cryCat.png";
 import smileCat from "./smileCat.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import diseasesData from "./diseasesInfo.json";
 const DiseaseResult = () => {
   const [hasDisease, setHasDisease] = useState(true);
+  const [disease, setDisease] = useState("결막염");
   const navigate = useNavigate();
-  const disease = "결막염";
   const petName = "또리";
+
+  const renderTextWithLineBreaks = (text) => {
+    return text.split("\n").map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
   const handleClick = () => {
     navigate("/HosipitalRecommend");
   };
   const handleClickMain = () => {
     navigate("/");
   };
+
+  // useEffect(() => {
+  //   // 서버에서 병명을 전달받는 API 호출
+  //   fetch('/api/getDisease')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setDisease(data.disease);
+  //       setHasDisease(true); // 질병이 있는 경우 true로 설정
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching disease data:', error);
+  //       setHasDisease(false); // 오류가 발생하면 false로 설정
+  //     });
+  // }, []);
+
+  const getDiseaseInfo = (diseaseName) => {
+    if (!diseasesData) return null;
+    return diseasesData.find((d) => d.name === diseaseName);
+  };
+
+  const diseaseInfo = getDiseaseInfo(disease);
+
   return (
     <div>
       {hasDisease === true && (
@@ -28,42 +61,20 @@ const DiseaseResult = () => {
             </button>
           </div>
           <div id="diseaseWrapper">
-            {disease === "결막염" && (
+            {diseaseInfo && (
               <div id="descriptionWrapper">
-                <div id="diseaseName">결막염</div>
-                <div class="diseaseDescription">
-                  <h1>결막염이란..</h1>
-                  <p>결막염은 가장 대표적인 고양이 눈병 중 하나인데요. 결막염은 번지거나 악화되는 속도가 빨라 초기에 빠르게 치료하는 것이 중요합니다.</p>
+                <div id="diseaseName">{disease}</div>
+                <div className="diseaseDescription">
+                  <h1>{disease}이란..</h1>
+                  <p>{diseaseInfo.description}</p>
                 </div>
-                <div class="diseaseDescription">
+                <div className="diseaseDescription">
                   <h1>증상</h1>
-                  <p>
-                    ✅ 눈을 뜨는 것을 불편해함<br></br>✅ 흰자위 부분 빨갛게 충혈<br></br>✅ 눈 주변이 부어있음<br></br>✅ 눈물, 눈곱이 많이 남
-                  </p>
+                  <p>{renderTextWithLineBreaks(diseaseInfo.symptoms)}</p>
                 </div>
-                <div class="diseaseDescription">
+                <div className="diseaseDescription">
                   <h1>원인</h1>
-                  <p>
-                    결막염은 세균, 바이러스, 곰팡이, 기생충 등에 감염되어 발생하는 경우가 가장 흔하다. 알레르기가 있거나 눈에 속눈썹 등의 이물질이 눈에 들어가는 경우에도 발생할 수 있다. 또 눈꺼풀 종양이 있는 경우에도 마찰로 자극이 되어 결막염이 생길
-                    수 있다.
-                  </p>
-                </div>
-              </div>
-            )}
-            {disease === "망막염" && (
-              <div id="descriptionWrapper">
-                <div id="diseaseName">망막염</div>
-                <div class="diseaseDescription">
-                  <h1>망막염이란</h1>
-                  <p>결막염...결막염...결막염...결막염...결막염...결막염...결막염...결막염...</p>
-                </div>
-                <div class="diseaseDescription">
-                  <h1>망막염 증상</h1>
-                  <p>결막염...결막염...결막염...결막염...결막염...결막염...결막염...결막염...</p>
-                </div>
-                <div class="diseaseDescription">
-                  <h1>망막염 원인</h1>
-                  <p>결막염...결막염...결막염...결막염...결막염...결막염...결막염...결막염...</p>
+                  <p>{diseaseInfo.causes}</p>
                 </div>
               </div>
             )}
