@@ -1,10 +1,11 @@
 import React from 'react';
+import S from './style.js'
 
 const SearchIdfinish = () => {
   return (
-    <div>
+    <S.Background>
       아이디 찾기 결과
-    </div>
+    </S.Background>
   );
 };
 
