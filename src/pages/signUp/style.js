@@ -168,4 +168,29 @@ S.CancleButton = styled.button`
   cursor: pointer;
 `;
 
+
+S.Image = styled.img`
+  width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  @media (max-width: 727px) {
+    width: 300px;
+    height: 100px;
+  }
+`
+
+S.P = styled.p`
+font-size:${ ({theme}) => theme.FONT_SIZE["default"]};
+font-weight: ${({theme})=> theme.FONT_WEIGHT["regular"]};
+text-align: center;
+margin: 8%;
+`
+
+S.Message = styled.p`
+  color: ${props => props.color};
+  font-size: ${({ theme }) => theme.FONT_SIZE["sub"]};
+  align-self: flex-start;
+  margin-left: 25%
+`;
+
 export default S;
