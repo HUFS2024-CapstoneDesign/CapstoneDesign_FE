@@ -512,6 +512,7 @@
   height: 175px;
   width: 480px;
 }
+
 .hospitalDescription h1 {
   font-weight: 400;
   font-size: 30px;
@@ -528,6 +529,7 @@
   width: 386px;
   margin-bottom: 40px;
 }
+
 #averageCost h1 {
   /* 결막염 평균 치료비용:  10만 3천원 */
 
@@ -680,6 +682,86 @@
   width: 318px;
   height: 74px;
 
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+/* HosipitalRecommend.js 모바일 */
+
+#mobileRecommendWrapper {
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  align-items: center;
+}
+
+#mobileMapWrapper #mobileNearMyHouse {
+  /* 내 주변 1차 동물병원 */
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  margin-bottom: 20px;
+
+  color: #000000;
+}
+
+#mobileHospitalLocation {
+  width: 324px;
+  height: 233px;
+  border: 3px solid #000000;
+  margin-bottom: 20px;
+}
+
+.mobileDescriptionWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.mobileHospitalDescription h1 {
+  /* 아이펫동물병원 10:00 ~ 18:00 경기 성남시 분당구 장미로 78 나와의 거리: 690m */
+  width: 318px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+#mobileAverageCost {
+  display: flex;
+  align-self: center;
+}
+#mobileAverageCost h1 {
+  /* 결막염 평균 치료비용:  10만 3천원 */
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #ef1212;
+}
+
+#mobileAverageCost p {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  text-align: center;
+  color: #ef1212;
+}
+
+#mobileAverageCostButton {
+  margin-top: 20px;
+  width: 274px;
+  height: 70px;
   background: #ff7816;
   border-radius: 50px;
   border: 0px;
