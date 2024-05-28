@@ -519,3 +519,133 @@
 
   color: #000000;
 }
+
+/* Mobile DiseaseResult.js */
+#mobileYesDiseaseWrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#mobileResultWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobileYesDiseaseWrapper #mobileCryCat {
+  margin-top: 140px;
+  margin-bottom: 15px;
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}
+
+#mobileYesDiseaseWrapper #mobileResultText {
+  width: 286px;
+  height: 18px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #000000;
+}
+
+#mobileYesDiseaseWrapper #mobileHospitalButton {
+  width: 308.44px;
+  height: 74px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+#mobileDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#mobileDescriptionWrapper #mobileDiseaseName {
+  /* 결막염 */
+  width: 96px;
+  height: 45px;
+  align-self: center;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  color: #000000;
+  margin: 20px;
+}
+
+.mobileDiseaseDescription h1 {
+  width: 297px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.mobileDiseaseDescription p {
+  /* 결막염이란? 결막염은 가장 대표적인 고양이 눈병 중 하나인데요. 결막염은 번지거나 악화되는 속도가 빨라 초기에 빠르게 치료하는 것이 중요합니다. ​ */
+  width: 297px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+/* Mobile DiseaseResult.js 질병 없는 경우*/
+#mobileNoDiseaseWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#mobileNoDiseaseWrapper #mobileSmileCat {
+  width: 200px;
+  height: 200px;
+}
+
+#mobileNoDiseaseWrapper h1 {
+  /* 발견된 질병이 없습니다! 또리는 건강한 냥이네요 ! */
+  width: 196px;
+  height: 41px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+#mobileNoDiseaseWrapper #mobileMainButton {
+  width: 318px;
+  height: 74px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
