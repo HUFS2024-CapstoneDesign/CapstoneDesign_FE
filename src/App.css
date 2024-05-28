@@ -470,7 +470,7 @@
 #recommendWrapper {
   display: flex;
   flex-direction: row;
-  margin-top: 80px;
+  margin-top: 200px;
   font-family: "Pretendard-Regular";
   font-style: normal;
 }
@@ -520,6 +520,47 @@
   color: #000000;
 }
 
+#averageCost {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: flex-start;
+  width: 386px;
+  margin-bottom: 40px;
+}
+#averageCost h1 {
+  /* 결막염 평균 치료비용:  10만 3천원 */
+
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+
+  color: #ef1212;
+}
+
+#averageCost p {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+
+  color: #ef1212;
+}
+
+#averageCostButton {
+  height: 75px;
+  width: 270px;
+  align-self: flex-start;
+  margin-bottom: 80px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
 /* Mobile DiseaseResult.js */
 #mobileYesDiseaseWrapper {
   display: flex;
