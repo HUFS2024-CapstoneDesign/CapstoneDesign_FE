@@ -56,7 +56,7 @@ const DiseaseResult = () => {
             <div id="resultWrapper">
               <img src={cryCat} alt="cryCat" id="cryCat" />
               <div id="resultText">
-                분석 결과 {petName}는 {disease}으로 추정됩니다.
+                분석 결과 {petName}는 {disease}으로<br></br> 추정됩니다.
               </div>
               <button onClick={handleClick} id="hospitalButton">
                 가까운 병원 추천받기
