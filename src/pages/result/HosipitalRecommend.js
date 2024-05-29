@@ -1,7 +1,7 @@
 import React from "react";
 import defaultMap from "./defaultMap.png";
 import diseasesData from "./diseasesInfo.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 
 const HosipitalRecommend = () => {
@@ -22,13 +22,33 @@ const HosipitalRecommend = () => {
       setIsButtonVisible(false);
     }
   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=5015e067209cba83116392b456477339&libraries=services,clusterer,drawing";
+    script.async = true;
+    script.onload = () => {
+      const container = document.getElementById("hospitalLocation");
+      const options = {
+        center: new window.kakao.maps.LatLng(37.566826, 126.9786567), // 서울 시청 좌표
+        level: 5,
+      };
+      const map = new window.kakao.maps.Map(container, options);
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <BrowserView>
         <div id="recommendWrapper">
           <div id="mapWrapper">
             <div id="nearMyHouse">내 주변 1차 동물병원</div>
-            <img src={defaultMap} alt="defaultMap" id="hospitalLocation" />
+            <div id="hospitalLocation" />
           </div>
           <div id="descriptionWrapper">
             <div className="hospitalDescription">

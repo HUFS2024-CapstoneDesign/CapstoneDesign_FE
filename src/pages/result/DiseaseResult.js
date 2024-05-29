@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import diseasesData from "./diseasesInfo.json";
 import { BrowserView, MobileView } from "react-device-detect";
 const DiseaseResult = () => {
-  const [hasDisease, setHasDisease] = useState(false);
+  const [hasDisease, setHasDisease] = useState(true);
   const [disease, setDisease] = useState("결막염");
   const navigate = useNavigate();
   const petName = "또리";
