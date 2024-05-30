@@ -12,7 +12,7 @@ import Identification from "../pages/searchPassword/Identification.js";
 import Mypage from "../pages/myPage/Mypage.js";
 import Upload from "../pages/upLoad/Upload.js";
 import DiseaseResult from "../pages/result/DiseaseResult.js";
-import HosipitalRecommend from "../pages/result/HosipitalRecommend.js";
+import HospitalRecommend from "../pages/result/HospitalRecommend.js";
 import Layout from "../pages/layout/Layout.js";
 
 const router = createBrowserRouter([
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/hospitalRecommend",
-        element: <HosipitalRecommend />,
+        element: <HospitalRecommend />,
       },
     ],
   },

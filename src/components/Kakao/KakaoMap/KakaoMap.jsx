@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-
-const KakaoMap = () => {
+import { MobileView, BrowserView } from "react-device-detect";
+const KakaoMap = ({ onHospitalsFound }) => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -45,6 +45,9 @@ const KakaoMap = () => {
 
               // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
               map.setBounds(bounds);
+
+              // Pass hospital data to the parent component
+              onHospitalsFound(limitedData);
             }
           }
 
@@ -70,9 +73,17 @@ const KakaoMap = () => {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, [onHospitalsFound]);
 
-  return <div id="kakaoMap" style={{ width: "621px", height: "447px" }}></div>;
+  return (
+    <>
+      <BrowserView>
+        <div id="kakaoMap" style={{ width: "621px", height: "447px" }}></div>
+      </BrowserView>
+      <MobileView>
+        <div id="kakaoMap" style={{ width: "324px", height: "233px" }}></div>
+      </MobileView>
+    </>
+  );
 };
-
 export default KakaoMap;

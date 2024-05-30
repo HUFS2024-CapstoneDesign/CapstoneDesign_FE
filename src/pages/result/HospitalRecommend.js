@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import defaultMap from "./defaultMap.png";
 import diseasesData from "./diseasesInfo.json";
-import { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import KakaoMap from "../../components/Kakao/KakaoMap/KakaoMap.jsx";
-const HosipitalRecommend = () => {
+
+const HospitalRecommend = () => {
   const [disease, setDisease] = useState("결막염");
   const [cost, setCost] = useState("");
   const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const [hospitals, setHospitals] = useState([]);
 
   const getDiseaseInfo = (diseaseName) => {
     if (!diseasesData) return null;
@@ -23,6 +24,26 @@ const HosipitalRecommend = () => {
     }
   };
 
+  const handleHospitalsFound = useCallback((hospitalData) => {
+    setHospitals((prevHospitals) => {
+      if (prevHospitals.length === 0) {
+        return hospitalData;
+      }
+      return prevHospitals;
+    });
+  }, []);
+
+  const createHospitalLink = (place) => {
+    const { x, y, place_url, place_name } = place;
+    const url = `${place_url}`;
+    console.log(place);
+    return (
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        {place_name}
+      </a>
+    );
+  };
+
   return (
     <div>
       <BrowserView>
@@ -30,25 +51,22 @@ const HosipitalRecommend = () => {
           <div id="mapWrapper">
             <div id="nearMyHouse">내 주변 1차 동물병원</div>
             <div id="hospitalLocation">
-              <KakaoMap /> {/* KakaoMap 컴포넌트 추가 */}
+              <KakaoMap onHospitalsFound={handleHospitalsFound} /> {/* KakaoMap 컴포넌트 추가 */}
             </div>
           </div>
           <div id="descriptionWrapper">
-            <div className="hospitalDescription">
-              <h1>
-                A병원<br></br>10:00 ~ 18:00<br></br>서울시 마포구 ...<br></br>나와의 거리: 690m
-              </h1>
-            </div>
-            <div className="hospitalDescription">
-              <h1>
-                B병원<br></br>10:00 ~ 18:00<br></br>서울시 동작구 ...<br></br>나와의 거리: 990m
-              </h1>
-            </div>
-            <div className="hospitalDescription">
-              <h1>
-                C병원<br></br>10:00 ~ 18:00<br></br>서울시 마포구 ...<br></br>나와의 거리: 1.3km
-              </h1>
-            </div>
+            {hospitals.map((hospital, index) => (
+              <div className="hospitalDescription" key={index}>
+                {createHospitalLink(hospital)}
+                <h1>
+                  {hospital.phone || " "}
+                  <br></br>
+                  {hospital.road_address_name || " "}
+                  <br></br>
+                  나와의 거리: {hospital.distance || "알 수 없음"}m
+                </h1>
+              </div>
+            ))}
             {diseaseInfo && (
               <div id="averageCost">
                 {isButtonVisible && (
@@ -71,26 +89,23 @@ const HosipitalRecommend = () => {
         <div id="mobileRecommendWrapper">
           <div id="mobileMapWrapper">
             <div id="mobileNearMyHouse">내 주변 1차 동물병원</div>
-            <div id="mobileMap">
-              <img src={defaultMap} alt="defaultMap" id="mobileHospitalLocation" />
+            <div id="mobileHospitalLocation">
+              <KakaoMap onHospitalsFound={handleHospitalsFound} /> {/* KakaoMap 컴포넌트 추가 */}
             </div>
           </div>
           <div id="mobileDescriptionWrapper">
-            <div className="mobileHospitalDescription">
-              <h1>
-                A병원<br></br>10:00 ~ 18:00<br></br>서울시 마포구 ...<br></br>나와의 거리: 690m
-              </h1>
-            </div>
-            <div className="mobileHospitalDescription">
-              <h1>
-                B병원<br></br>10:00 ~ 18:00<br></br>서울시 동작구 ...<br></br>나와의 거리: 990m
-              </h1>
-            </div>
-            <div className="mobileHospitalDescription">
-              <h1>
-                C병원<br></br>10:00 ~ 18:00<br></br>서울시 마포구 ...<br></br>나와의 거리: 1.3km
-              </h1>
-            </div>
+            {hospitals.map((hospital, index) => (
+              <div className="mobileHospitalDescription" key={index}>
+                {createHospitalLink(hospital)}
+                <h1>
+                  {hospital.phone || " "}
+                  <br></br>
+                  {hospital.road_address_name || " "}
+                  <br></br>
+                  나와의 거리: {hospital.distance || "알 수 없음"}m
+                </h1>
+              </div>
+            ))}
             {diseaseInfo && (
               <div id="mobileAverageCost">
                 {isButtonVisible && (
@@ -113,4 +128,4 @@ const HosipitalRecommend = () => {
   );
 };
 
-export default HosipitalRecommend;
+export default HospitalRecommend;
