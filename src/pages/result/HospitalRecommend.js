@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import defaultMap from "./defaultMap.png";
 import diseasesData from "./diseasesInfo.json";
 import { BrowserView, MobileView } from "react-device-detect";
-import KakaoMap from "../../components/Kakao/KakaoMap/KakaoMap.jsx";
+import KakaoMap from "../../components/kakao/kakaomap/KakaoMap.jsx";
 
 const HospitalRecommend = () => {
   const [disease, setDisease] = useState("결막염");
