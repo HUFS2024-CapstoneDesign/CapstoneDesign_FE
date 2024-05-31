@@ -12,7 +12,7 @@ import Identification from "../pages/searchPassword/Identification.js";
 import Mypage from "../pages/myPage/Mypage.js";
 import Upload from "../pages/upLoad/Upload.js";
 import DiseaseResult from "../pages/result/DiseaseResult.js";
-import HosipitalRecommend from "../pages/result/HosipitalRecommend.js";
+import HospitalRecommend from "../pages/result/HospitalRecommend.js";
 import Layout from "../pages/layout/Layout.js";
 
 const router = createBrowserRouter([
@@ -20,65 +20,65 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-  {
-    path: "/",
-    element: <Main />
+      {
+        path: "/",
+        element: <Main />,
+      },
+      {
+        path: "/inputInfo",
+        element: <MainInputInfo />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/searchId",
+        element: <SearchId />,
+      },
+      {
+        path: "/searchIdFinish",
+        element: <SearchIdfinish />,
+      },
+      {
+        path: "/identification",
+        element: <Identification />,
+      },
+      {
+        path: "/changePassword",
+        element: <ChangePassword />,
+      },
+      {
+        path: "/mypage",
+        element: <Mypage />,
+      },
+      {
+        path: "/upload",
+        element: <Upload />,
+      },
+      {
+        path: "/diseaseResult",
+        element: <DiseaseResult />,
+      },
+      {
+        path: "/hospitalRecommend",
+        element: <HospitalRecommend />,
+      },
+    ],
   },
+
   {
-    path : "/inputInfo",
-    element : <MainInputInfo />
-  },
-  {
-    path : "/signUp",
-    element : <SignUp />
-  },
-  {
-    path : "/login" ,
-    element : <Login/>
-  },
-  {
-    path : "/searchId" ,
-    element : <SearchId />
-  },
-  {
-    path : "/searchIdFinish",
-    element : <SearchIdfinish />
-  },
-  {
-    path : "/identification" ,
-    element : <Identification />
-  },
-  {
-    path : "/changePassword" ,
-    element : <ChangePassword />
-  },
-  {
-    path : "/mypage" ,
-    element : <Mypage />
-  },
-  {
-    path : "/upload" ,
-    element : <Upload />
-  },
-  {
-    path : "/diseaseResult" ,
-    element : <DiseaseResult />
-  },
-  {
-    path : "/hospitalReccomend" ,
-    element : <HosipitalRecommend/>
-  }
-  ]},
-  
-  {
-    path : "/signUpFinish" ,
-    element : <SignUpFinish />
+    path: "/signUpFinish",
+    element: <SignUpFinish />,
   },
   {
     path: "*",
-    element: <NotFound />
-  }
+    element: <NotFound />,
+  },
 ]);
-
 
 export default router;

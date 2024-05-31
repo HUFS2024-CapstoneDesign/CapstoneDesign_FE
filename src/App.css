@@ -36,3 +36,742 @@
     transform: rotate(360deg);
   }
 }
+
+/* MainPage desktop*/
+#MainWrapper {
+  width: 1440px;
+  height: 1024px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 253, 0) 0%, rgba(255, 148, 70, 0.77824) 97.28%, rgba(255, 145, 64, 0.8) 100%), #ffffff;
+  background-size: 1440px 1024px;
+  border: 0px;
+}
+
+#MainWrapper #introTextWrapper {
+  position: absolute;
+  width: 814px;
+  height: 288px;
+  left: 111px;
+  top: 197px;
+}
+#MainWrapper p {
+  /* “캣치헬스는 반려동물에게 흔히 발생하는 ㅇㅇㅇ,xxx등의 질병을 사진 한장의 업로드를 통하여 신속히 진단하고, 해당 질병의 예상되는 진료비와 바로 접근 가능한 병원의 정보를  제공하는 서비스입니다. 불필요한 병원 내원으로 인한 비용 발생을 줄이고 효과적으로 진단받아 내가 아끼는 동물이 더이상 고통받지 않게 해주세요 !” */
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 48px;
+  /* or 185% */
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+
+#MainWrapper #startButton {
+  position: absolute;
+
+  width: 247px;
+  height: 81px;
+  left: 119px;
+  top: 536px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+  /* 시작하기  */
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 28px;
+
+  color: #ffffff;
+}
+
+#MainWrapper #catTower {
+  position: absolute;
+  width: 451px;
+  height: auto;
+  left: 927px;
+  top: 283px;
+}
+
+#MainWrapper #defaultProfile {
+  position: absolute;
+  width: 79px;
+  height: 79px;
+  right: 29px;
+  top: 20px;
+}
+
+/* Main page mobile */
+#MobileMainWrapper #introTextWrapper {
+  position: absolute;
+  width: 334px;
+  height: 306px;
+  left: calc(50% - 334px / 2 - 0.5px);
+  top: 126px;
+}
+#MobileMainWrapper p {
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+#MobileMainWrapper #mobileDefaultProfile {
+  position: absolute;
+  width: 50%;
+  height: 30px;
+  left: 320px;
+  top: 19px;
+}
+#MobileMainWrapper #startButton {
+  position: absolute;
+  width: 194px;
+  height: 63.62px;
+  left: calc(50% - 194px / 2 - 0.5px);
+  top: 475px;
+
+  background: #ff7816;
+  border-radius: 50px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  border: 0px;
+
+  color: #ffffff;
+}
+#MobileMainWrapper #cat {
+  position: absolute;
+  width: 168px;
+  height: 158px;
+  left: 225px;
+  top: 598px;
+}
+
+/*MainInput page*/
+#MainInputInfoWrapper {
+  width: 1440px;
+  height: 1024px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 253, 0) 0%, rgba(255, 148, 70, 0.77824) 97.28%, rgba(255, 145, 64, 0.8) 100%), #ffffff;
+  background-size: 1440px 1024px;
+  border: 0px;
+
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#MainInputInfoWrapper h1 {
+  /* 애완동물의 이름을 입력해 주세요. */
+
+  position: absolute;
+  width: 703px;
+  height: 167px;
+  left: 369px;
+  top: 264px;
+
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+#MainInputInfoWrapper p {
+  /* 이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요 ! */
+  position: absolute;
+  width: 732px;
+  height: 85px;
+  left: 354px;
+  top: 483px;
+
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 36px;
+
+  color: #000000;
+}
+#MainInputInfoWrapper #diagnoseButton {
+  position: absolute;
+  width: 265.92px;
+  height: 87.2px;
+  left: 587px;
+  top: 650px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  /* 진단받기 */
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 31px;
+
+  color: #ffffff;
+}
+
+#MainInputInfoWrapper #nameInput {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 768px;
+  height: 115px;
+  left: 336px;
+  top: 345px;
+
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 50px;
+}
+
+#MainInputInfoWrapper #nameInput[type="text"]::placeholder {
+  /* 이름을 입력해주세요 */
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  color: #bfbfbf;
+}
+#MainInputInfoWrapper #nameInput[type="text"] {
+  padding-left: 32px;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+/* MainInputInfo Mobile */
+#MobileMainInputInfoWrapper {
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+#MobileMainInputInfoWrapper #mobileDefaultProfile {
+  position: absolute;
+  width: 50%;
+  height: 30px;
+  left: 320px;
+  top: 19px;
+}
+#MobileMainInputInfoWrapper #h1Wrapper {
+  position: absolute;
+  width: 340px;
+  height: 29px;
+  left: calc(25% - 340px / 2 + 124.5px);
+  top: 175px;
+}
+#MobileMainInputInfoWrapper h1 {
+  /* 애완동물의 이름을 입력해 주세요. */
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #000000;
+}
+
+#MobileMainInputInfoWrapper #nameInput {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 281px;
+  height: 86px;
+  left: calc(50% - 281px / 2);
+  top: 216px;
+
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 50px;
+}
+
+#MobileMainInputInfoWrapper #nameInput[type="text"]::placeholder {
+  /* 이름을 입력해주세요 */
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #bfbfbf;
+}
+#MobileMainInputInfoWrapper #nameInput[type="text"] {
+  padding-left: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+#MobileMainInputInfoWrapper p {
+  /* 이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요 ! */
+  position: absolute;
+  width: 361px;
+  height: 26px;
+  left: calc(25% - 361px / 2 + 120px);
+  top: 310px;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #000000;
+}
+#MobileMainInputInfoWrapper #diagnoseButton {
+  position: absolute;
+  width: 194px;
+  height: 63.62px;
+  left: calc(50% - 194px / 2 - 0.5px);
+  top: 426px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  /* 진단받기 */
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+  border: 0px;
+}
+
+/* DiseaseResult.js */
+#yesDiseaseWrapper {
+  display: flex;
+  flex-direction: row;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+#resultWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#yesDiseaseWrapper #cryCat {
+  width: 337px;
+  height: 341px;
+}
+
+#yesDiseaseWrapper #resultText {
+  /* 분석 결과 또리는 결막염으로 추정됩니다. */
+
+  width: 507px;
+  height: 57px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  margin-bottom: 35px;
+  color: #000000;
+}
+
+#yesDiseaseWrapper #hospitalButton {
+  width: 350px;
+  height: 84.53px;
+
+  border: 0px;
+  background: #ff7816;
+  border-radius: 50px;
+  /* 가까운 병원 추천받기 */
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+#descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#descriptionWrapper #diseaseName {
+  /* 결막염 */
+  left: 994px;
+  top: 180px;
+
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+.diseaseDescription h1 {
+  width: 564px;
+  height: 43px;
+  padding-top: 15px;
+  padding-left: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+.diseaseDescription p {
+  /* 결막염은 가장 대표적인 고양이 눈병 중 하나인데요. 결막염은 번지거나 악화되는 속도가 빨라 초기에 빠르게 치료하는 것이 중요합니다. */
+  width: 564px;
+  height: auto;
+  padding-top: 15px;
+  padding-left: 30px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #000000;
+}
+
+/* DiseaseResult.js 병 없는 경우*/
+#noDiseaseWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#noDiseaseWrapper #smileCat {
+  width: 354px;
+  height: 354px;
+}
+
+#noDiseaseWrapper h1 {
+  /* 발견된 질병이 없습니다! 또리는 건강한 냥이네요 ! */
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  text-align: center;
+  width: 517px;
+  height: 179px;
+  font-weight: 550;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+#noDiseaseWrapper #mainButton {
+  width: 318px;
+  height: 74px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+/* HosipitalRecommend.js */
+
+#recommendWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 200px;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#mapWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#mapWrapper #nearMyHouse {
+  /* 내 주변 1차 동물병원 */
+
+  width: 621px;
+  height: 62px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
+
+  color: #000000;
+}
+
+#descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  padding-top: 35px;
+}
+
+.hospitalDescription {
+  /* A병원 10:00 ~ 18:00 서울시 마포구 ... 나와의 거리: 690m */
+  height: 175px;
+  width: 480px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.hospitalDescription h1 {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 36px;
+
+  color: #000000;
+}
+
+#hospitalLocation {
+  width: 627px;
+  height: 453px;
+  border: 3px solid #000000;
+}
+
+#averageCost {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: flex-start;
+  width: 386px;
+  margin-bottom: 40px;
+}
+
+#averageCost h1 {
+  /* 결막염 평균 치료비용:  10만 3천원 */
+
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+
+  color: #ef1212;
+}
+
+#averageCost p {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+
+  color: #ef1212;
+}
+
+#averageCostButton {
+  height: 75px;
+  width: 270px;
+  align-self: flex-start;
+  margin-bottom: 80px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+/* Mobile DiseaseResult.js */
+#mobileYesDiseaseWrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#mobileResultWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobileYesDiseaseWrapper #mobileCryCat {
+  margin-top: 140px;
+  margin-bottom: 15px;
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}
+
+#mobileYesDiseaseWrapper #mobileResultText {
+  width: 286px;
+  height: 18px;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #000000;
+}
+
+#mobileYesDiseaseWrapper #mobileHospitalButton {
+  width: 308.44px;
+  height: 74px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+#mobileDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#mobileDescriptionWrapper #mobileDiseaseName {
+  /* 결막염 */
+  width: 96px;
+  height: 45px;
+  align-self: center;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  color: #000000;
+  margin: 20px;
+}
+
+.mobileDiseaseDescription h1 {
+  width: 297px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.mobileDiseaseDescription p {
+  /* 결막염이란? 결막염은 가장 대표적인 고양이 눈병 중 하나인데요. 결막염은 번지거나 악화되는 속도가 빨라 초기에 빠르게 치료하는 것이 중요합니다. ​ */
+  width: 297px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+/* Mobile DiseaseResult.js 질병 없는 경우*/
+#mobileNoDiseaseWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+}
+
+#mobileNoDiseaseWrapper #mobileSmileCat {
+  width: 200px;
+  height: 200px;
+}
+
+#mobileNoDiseaseWrapper h1 {
+  /* 발견된 질병이 없습니다! 또리는 건강한 냥이네요 ! */
+  width: 196px;
+  height: 41px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+#mobileNoDiseaseWrapper #mobileMainButton {
+  width: 318px;
+  height: 74px;
+
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+/* HosipitalRecommend.js 모바일 */
+
+#mobileRecommendWrapper {
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+  align-items: center;
+}
+
+#mobileMapWrapper #mobileNearMyHouse {
+  /* 내 주변 1차 동물병원 */
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  margin-bottom: 20px;
+
+  color: #000000;
+}
+
+#mobileHospitalLocation {
+  width: 330px;
+  height: 239px;
+  border: 3px solid #000000;
+  margin-bottom: 20px;
+}
+
+.mobileDescriptionWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.mobileHospitalDescription h1 {
+  /* 아이펫동물병원 10:00 ~ 18:00 경기 성남시 분당구 장미로 78 나와의 거리: 690m */
+  width: 318px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+#mobileAverageCost {
+  display: flex;
+  align-self: center;
+}
+#mobileAverageCost h1 {
+  /* 결막염 평균 치료비용:  10만 3천원 */
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #ef1212;
+}
+
+#mobileAverageCost p {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  text-align: center;
+  color: #ef1212;
+}
+
+#mobileAverageCostButton {
+  margin-top: 20px;
+  width: 274px;
+  height: 70px;
+  background: #ff7816;
+  border-radius: 50px;
+  border: 0px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #ffffff;
+}

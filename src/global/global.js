@@ -21,6 +21,6 @@ ${reset}
   text-decoration: none;
 }
 
-`
+`;
 
 export default GlobalStyle;
