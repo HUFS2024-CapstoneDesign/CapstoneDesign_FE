@@ -21,7 +21,7 @@ export default function Main() {
     <div>
       <BrowserView>
         <div id="MainWrapper">
-          <Link id="defaultProfile" to="/profile">
+          <Link id="defaultProfile" to="/mypage">
             <img src={defaultProfile} alt="profile" />
           </Link>
           <div id="introTextWrapper">
