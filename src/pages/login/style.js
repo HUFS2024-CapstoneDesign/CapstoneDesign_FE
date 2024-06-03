@@ -4,7 +4,7 @@ const S = {};
 
 S.Background = styled.div`
   width: 90%;
-  height: 100vh;
+  height: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
