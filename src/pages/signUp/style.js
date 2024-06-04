@@ -186,11 +186,19 @@ text-align: center;
 margin: 8%;
 `
 
+S.PasswordMessage = styled.p`
+  color: ${props => props.color};
+  font-size: ${({ theme }) => theme.FONT_SIZE["sub"]};
+  align-self: flex-start;
+  margin-top: 1%;
+  margin-left: 2%;
+`
+
 S.Message = styled.p`
   color: ${props => props.color};
   font-size: ${({ theme }) => theme.FONT_SIZE["sub"]};
   align-self: flex-start;
-  margin-left: 25%
+  margin-left: 27%
 `;
 
 export default S;
