@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -36,6 +37,8 @@ const SignUp = () => {
   
   const togglePasswordVisiblity = () => setIsPasswordShown(!isPasswordShown);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!passwordMatch) {
@@ -61,8 +64,8 @@ const SignUp = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        alert('회원가입이 성공적으로 완료되었습니다!');
         console.log(responseData);
+        navigate('/signupfinish');
       } else {
         const errorData = await response.json();
         alert(`회원가입 실패: ${errorData.message}`);
