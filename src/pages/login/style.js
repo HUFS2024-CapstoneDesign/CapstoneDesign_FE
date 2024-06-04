@@ -78,7 +78,8 @@ S.SubmitButton = styled.button`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
   border: none;
   border-radius: 50px;
-  margin-top: 3%;
+  margin-top: 10%;
+  margin-left: 25%;
   cursor: pointer;
 `;
 

@@ -1,38 +1,76 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
-
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-
-  const togglePasswordVisiblity = () => {
+  const togglePasswordVisibility = () => {
     setIsPasswordShown(!isPasswordShown);
   };
+
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm();
+  const navigate = useNavigate();
+
+  const handleLogin = async (data) => {
+    try {
+      const response = await fetch('https://www.catchhealth.shop/api/v1/members/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          id: data.id,
+          password: data.password
+        })
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('일치하는 유저가 없습니다. 아이디와 비밀번호를 확인해주세요.');
+        } else {
+          throw new Error('로그인 실패');
+        }
+      }
+
+      const result = await response.json();
+      console.log(result);
+      alert('로그인 성공');
+      navigate('/');
+    } catch (error) {
+      console.error('로그인 중 에러 발생:', error);
+      alert(error.message);
+    }
+  };
+
   return (
     <S.Background>
       <S.H1>로그인</S.H1>
-      <S.Input type='text' placeholder='아이디를 입력해주세요'/>
-      <S.InputContainer>
-        <S.PasswordContainer>
-          <S.Input type={isPasswordShown ? 'text' : 'password'} placeholder='새로운 비밀번호 입력'/>
-              <S.Icon onClick={togglePasswordVisiblity}>
-                <FontAwesomeIcon icon={isPasswordShown ? faEyeSlash : faEye} style={{ fontSize: "18px" }} color='#9F9F9F'/>
-              </S.Icon>
-        </S.PasswordContainer>
-      </S.InputContainer>
+      <form onSubmit={handleSubmit(handleLogin)}>
+        <S.Input type='text' placeholder='아이디를 입력해주세요' 
+          {...register("id", { required: true })} />
+        <S.InputContainer>
+          <S.PasswordContainer>
+            <S.Input type={isPasswordShown ? 'text' : 'password'} placeholder='비밀번호를 입력해주세요' 
+              {...register("password", { required: true })} />
+            <S.Icon onClick={togglePasswordVisibility}>
+              <FontAwesomeIcon icon={isPasswordShown ? faEyeSlash : faEye} style={{ fontSize: "18px" }} color='#9F9F9F' />
+            </S.Icon>
+          </S.PasswordContainer>
+        </S.InputContainer>
 
-      <S.LinksContainer>
-        <NavLink to={'/searchid'}><p>아이디 찾기</p></NavLink>
-        <NavLink to={'/identification'}><p>비밀번호 찾기</p></NavLink>
-        <NavLink to={'/signup'}><p>회원가입</p></NavLink>
-      </S.LinksContainer>
+        <S.LinksContainer>
+          <NavLink to={'/searchid'}><p>아이디 찾기</p></NavLink>
+          <NavLink to={'/identification'}><p>비밀번호 찾기</p></NavLink>
+          <NavLink to={'/signup'}><p>회원가입</p></NavLink>
+        </S.LinksContainer>
 
-      <S.SubmitButton>로그인하기</S.SubmitButton>
-
+        <S.SubmitButton type="submit" disabled={isSubmitting}>로그인하기</S.SubmitButton>
+      </form>
     </S.Background>
   );
 };
