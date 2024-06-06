@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import KakaoLogin from './KakaoLogin.jsx';
 
 const Login = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -14,6 +15,13 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { isSubmitting } } = useForm();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('loggedIn');
+    if (loggedIn) {
+      navigate('/'); 
+    }
+  }, [navigate]);
 
   const handleLogin = async (data) => {
     try {
@@ -40,6 +48,7 @@ const Login = () => {
       const result = await response.json();
       console.log(result);
       alert('로그인 성공');
+      localStorage.setItem('loggedIn', true); 
       navigate('/');
     } catch (error) {
       console.error('로그인 중 에러 발생:', error);
@@ -69,7 +78,10 @@ const Login = () => {
           <NavLink to={'/signup'}><p>회원가입</p></NavLink>
         </S.LinksContainer>
 
-        <S.SubmitButton type="submit" disabled={isSubmitting}>로그인하기</S.SubmitButton>
+        <S.ButtonContainer>
+          <KakaoLogin />
+          <S.SubmitButton type="submit" disabled={isSubmitting}>로그인하기</S.SubmitButton>
+        </S.ButtonContainer>
       </form>
     </S.Background>
   );
