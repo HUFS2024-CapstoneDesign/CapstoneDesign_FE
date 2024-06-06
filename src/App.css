@@ -400,6 +400,10 @@
   color: #000000;
 }
 
+.loadingWrapper {
+  height: 500px;
+}
+
 .diseaseDescription h1 {
   width: 564px;
   height: 43px;
