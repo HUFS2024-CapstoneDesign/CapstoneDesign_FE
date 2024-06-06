@@ -198,7 +198,15 @@ S.Message = styled.p`
   color: ${props => props.color};
   font-size: ${({ theme }) => theme.FONT_SIZE["sub"]};
   align-self: flex-start;
-  margin-left: 27%
+  margin-left: 27%;
+`;
+
+S.NicknameMessage = styled.p`
+  color: ${props => props.color};
+  font-size: ${({ theme }) => theme.FONT_SIZE["sub"]};
+  align-self: flex-start;
+  margin-left: 1%;
+  margin-top: 1%;
 `;
 
 export default S;
