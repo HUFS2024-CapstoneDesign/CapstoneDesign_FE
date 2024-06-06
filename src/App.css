@@ -775,3 +775,24 @@
 
   color: #ffffff;
 }
+
+/* IsAnalyzing.js */
+#analyzingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#analyzingWrapper p {
+  /* 또리누나님의 고양이가 아픈 곳은 없는지 분석중입니다. 조금만 기다려 주세요 ! */
+  font-family: "Pretendard-Regular";
+  font-style: normal;
+
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+
+  padding-top: 50px;
+}

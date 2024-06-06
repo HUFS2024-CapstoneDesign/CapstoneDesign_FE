@@ -14,6 +14,7 @@ import Upload from "../pages/upLoad/Upload.js";
 import DiseaseResult from "../pages/result/DiseaseResult.js";
 import HospitalRecommend from "../pages/result/HospitalRecommend.js";
 import Layout from "../pages/layout/Layout.js";
+import IsAnalyzing from "../pages/upLoad/IsAnalyzing.js";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/upload",
         element: <Upload />,
+      },
+      {
+        path: "/analyze",
+        element: <IsAnalyzing />,
       },
       {
         path: "/diseaseResult",
