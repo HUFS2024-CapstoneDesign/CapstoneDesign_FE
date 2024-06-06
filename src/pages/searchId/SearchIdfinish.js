@@ -9,7 +9,7 @@ const SearchIdfinish = () => {
   const maskEmail = (email) => {
     if (!email) return '아이디를 찾을 수 없습니다.';
     const [user, domain] = email.split('@');
-    const maskedUser = user.substring(0, 3) + '****';
+    const maskedUser = user.length > 3 ? user.substring(0, user.length - 3) + '***' : '***';
     return `${maskedUser}@${domain}`;
   };
 
