@@ -48,18 +48,17 @@ const Identification = () => {
       },
       body: JSON.stringify({ email, code }),
     })
-      .then(async (response) => {
-        if (response.ok) {
-          alert('인증번호가 확인되었습니다. 비밀번호를 변경해주세요.');
-          navigate('/changepassword', { state: { email } }); // 이메일 정보를 전달
-        } else {
-          const errorResponse = await response.json();
-          alert(errorResponse.message || '인증번호가 잘못되었습니다.');
-        }
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    .then(async (response) => {
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        const token = jsonResponse.token; 
+        alert('인증번호가 확인되었습니다. 비밀번호를 변경해주세요.');
+        navigate('/changepassword', { state: { email, token } });
+      } else {
+        const errorResponse = await response.json();
+        alert(errorResponse.message || '인증번호가 잘못되었습니다.');
+      }
+    })
   };
 
   return (

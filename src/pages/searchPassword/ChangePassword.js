@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ const ChangePassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(null);
+  const [token, setToken] = useState(null);
 
   const togglePasswordVisiblity = () => {
     setIsPasswordShown(!isPasswordShown);
@@ -25,11 +26,19 @@ const ChangePassword = () => {
   };
 
   const location = useLocation();
-  const email = location.state?.email || '';
+  // const query = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    const state = location.state;
+    if (state && state.token) {
+      setToken(state.token);
+    } else {
+      alert('토큰을 찾을 수 없습니다.');
+    }
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handleSubmit 호출됨");
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{9,16}$/;
 
@@ -38,40 +47,32 @@ const ChangePassword = () => {
       return;
     }
 
+    if (!token) {
+      alert('유효한 토큰이 없습니다.');
+      return;
+    }
+
     try {
-      const loginResponse = await fetch('https://www.catchhealth.shop/api/v1/members/login', {
-        method: 'POST',
+      const changePasswordResponse = await fetch('https://www.catchhealth.shop/api/v1/members/change-password', {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ password }),
       });
 
-      if (loginResponse.ok) {
-        const { data: { accessToken } } = await loginResponse.json();
-        const changePasswordResponse = await fetch('https://www.catchhealth.shop/api/v1/members/change-password', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({ password }),
-        });
-
-        if (changePasswordResponse.ok) {
-          alert('비밀번호가 성공적으로 변경되었습니다.');
-        } else {
-          const errorResponse = await changePasswordResponse.json();
-          alert(errorResponse.message || '비밀번호 변경에 실패했습니다.');
-        }
+      if (changePasswordResponse.ok) {
+        alert('비밀번호가 성공적으로 변경되었습니다.');
       } else {
-        const errorResponse = await loginResponse.json();
-        alert(errorResponse.message || '로그인에 실패했습니다.');
+        const errorResponse = await changePasswordResponse.json();
+        alert(errorResponse.message || '비밀번호 변경에 실패했습니다.');
       }
     } catch (error) {
       alert('네트워크 오류가 발생했습니다.');
     }
   };
+
 
   return (
     <S.Background>
