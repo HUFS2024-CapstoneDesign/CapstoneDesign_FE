@@ -42,14 +42,11 @@ const Mypage = () => {
 
 
   useEffect(() => {
-    // 로그인한 사용자의 정보를 불러오는 로직 (가정)
-    // 여기서는 간단히 사용자 정보를 상태에 저장하는 예시를 보여줍니다.
-    // 실제로는 로그인 성공 후 받아온 사용자 정보를 사용해야 합니다.
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('/api/v1/members/login'); // 로그인 API 호출
+        const response = await fetch('https://www.catchhealth.shop/api/v1/members/login'); 
         const data = await response.json();
-        setNickname(data.nickname); // 응답으로 받은 닉네임을 상태에 저장
+        setNickname(data.nickName); 
       } catch (error) {
         console.error("로그인 정보를 불러오는데 실패했습니다.", error);
       }

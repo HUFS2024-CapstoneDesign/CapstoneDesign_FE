@@ -8,14 +8,18 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [domain, setDomain] = useState('@naver.com');
+  const [emailMessage, setEmailMessage] = useState('');
+  const [emailMessageColor, setEmailMessageColor] = useState('green');
+
   const [nickName, setNickName] = useState('');
+  const [nicknameMessage, setNicknameMessage] = useState('');
+  const [nicknameMessageColor, setNicknameMessageColor] = useState('green');
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(null);
   const [address, setAddress] = useState('');
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [nicknameMessage, setNicknameMessage] = useState('');
-  const [emailMessage, setEmailMessage] = useState('');
 
   const handleDomainChange = (e) => setDomain(e.target.value);
   const handleConfirmPasswordChange = (e) => {
@@ -78,41 +82,48 @@ const SignUp = () => {
 
   const checkNickname = async () => {
     try {
-      const token = 'YOUR_AUTH_TOKEN'; 
       const response = await fetch(`https://www.catchhealth.shop/api/v1/members/check-nickname?nickName=${nickName}`, {
+        method: 'POST', 
         headers: {
-          'Authorization': `Bearer ${token}`, 
+          'Content-Type': 'application/json', 
         },
+        body: JSON.stringify({ nickName: nickName }), 
       });
       const data = await response.json();
-      if (data.exists) {
+      if (data.data === false) { 
         setNicknameMessage('중복된 닉네임입니다.');
-      } else {
+        setNicknameMessageColor('red'); 
+      } else if (data.data === true) { 
         setNicknameMessage('사용 가능한 닉네임입니다.');
+        setNicknameMessageColor('green'); 
       }
     } catch (error) {
       console.error('닉네임 중복 확인 중 오류 발생:', error.message);
     }
   };
+
   
   const checkEmail = async () => {
     try {
-      const token = 'YOUR_AUTH_TOKEN';
-      const response = await fetch(`https://www.catchhealth.shop/api/v1/members/check-email?email=${email + domain}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`, 
-        },
-      });
-      const data = await response.json();
-      if (data.exists) {
-        setEmailMessage('중복된 아이디입니다.');
-      } else {
-        setEmailMessage('사용 가능한 아이디입니다.');
-      }
+        const response = await fetch(`https://www.catchhealth.shop/api/v1/members/check-email?email=${email+domain}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email + domain }), 
+        });
+        const data = await response.json();
+        if (data.data === false) { 
+            setEmailMessage('중복된 아이디입니다.');
+            setEmailMessageColor('red'); 
+        } else if (data.data === true) { 
+            setEmailMessage('사용 가능한 아이디입니다.');
+            setEmailMessageColor('green'); 
+        }
     } catch (error) {
-      console.error('이메일 중복 확인 중 오류 발생:', error.message);
+        console.error('이메일 중복 확인 중 오류 발생:', error.message);
     }
-  };
+};
 
 
   return (
@@ -126,7 +137,7 @@ const SignUp = () => {
               <S.Input id="nickName" type='text' value={nickName} onChange={(e) => setNickName(e.target.value)} />
               <S.OverlapButton type="button" onClick={checkNickname}>중복확인</S.OverlapButton>
             </S.NicknameInputWrapper>
-            {nicknameMessage && <S.Message color='green'>{nicknameMessage}</S.Message>}
+            {nicknameMessage && <S.NicknameMessage color={nicknameMessageColor}>{nicknameMessage}</S.NicknameMessage>}
           </S.NicknameIdContainer>
 
           <S.NicknameIdContainer>
@@ -146,7 +157,7 @@ const SignUp = () => {
               </S.EmailContainer>
               <S.OverlapButton type="button" onClick={checkEmail}>중복확인</S.OverlapButton>
             </S.NicknameInputWrapper>
-            {emailMessage && <S.Message color='green'>{emailMessage}</S.Message>}
+            {emailMessage && <S.NicknameMessage color={emailMessageColor}>{emailMessage}</S.NicknameMessage>}
           </S.NicknameIdContainer>
 
           <S.InputContainer>
