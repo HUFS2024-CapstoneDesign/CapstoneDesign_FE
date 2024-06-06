@@ -1,15 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import PetRecord from './PetRecord.jsx';
+import Nickname from './Nickname.jsx';
 
 const Mypage = () => {
   const [profileImage, setProfileImage] = useState(null);
   const fileInputRef = useRef(null);
 
-  const [nickname, setNickname] = useState("또리누나");
+  const [nickname, setNickname] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
   const [address, setAddress] = useState("서울특별시 강남구 대치동 ㅇㅇ아파트 101동 101호");
@@ -39,9 +40,48 @@ const Mypage = () => {
     fileInputRef.current.click();
   };
 
-  const handleNicknameChange = (event) => {
-    setNickname(event.target.value);
+
+  useEffect(() => {
+    // 로그인한 사용자의 정보를 불러오는 로직 (가정)
+    // 여기서는 간단히 사용자 정보를 상태에 저장하는 예시를 보여줍니다.
+    // 실제로는 로그인 성공 후 받아온 사용자 정보를 사용해야 합니다.
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch('/api/v1/members/login'); // 로그인 API 호출
+        const data = await response.json();
+        setNickname(data.nickname); // 응답으로 받은 닉네임을 상태에 저장
+      } catch (error) {
+        console.error("로그인 정보를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
+  const updateNickname = async (newNickname) => {
+    try {
+      const response = await fetch('/api/v1/members/nickname', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nickname: newNickname }),
+      });
+      if (response.ok) {
+        alert('닉네임이 성공적으로 변경되었습니다.');
+        setNickname(newNickname);
+      } else {
+        alert('닉네임 변경에 실패했습니다.');
+      }
+    } catch (error) {
+      alert('닉네임 변경에 실패했습니다.');
+      console.error("닉네임을 업데이트하는데 실패했습니다.", error);
+    }
   };
+
+  // const handleNicknameChange = (event) => {
+  //   setNickname(event.target.value);
+  // };
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -91,7 +131,7 @@ const Mypage = () => {
         </S.ProfileContainer>
         
         <S.NicknameContainer>
-          {isEditing ? (
+          {/* {isEditing ? (
             <>
               <S.NicknameInput value={nickname} onChange={handleNicknameChange} />
               <S.EditButton onClick={toggleEdit} isEditing={isEditing}>수정 완료</S.EditButton>
@@ -101,7 +141,9 @@ const Mypage = () => {
               <span style={{ fontSize: '20px' }}>{nickname}</span>
               <S.EditButton onClick={toggleEdit} isEditing={isEditing}>수정</S.EditButton>
             </>
-          )}
+            
+          )} */}
+          <Nickname initialNickname={nickname} updateNickname={updateNickname} />
         </S.NicknameContainer>
         </S.ProfileNicknameContainer>
        

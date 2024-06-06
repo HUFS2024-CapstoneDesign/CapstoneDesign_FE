@@ -69,6 +69,13 @@ S.LinksContainer = styled.div`
   margin: 0 10px;
 }
 `
+
+S.ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10%;
+  gap: 30px;
+  `
 S.SubmitButton = styled.button`
   width: 240px;
   height: 60px;
@@ -78,8 +85,6 @@ S.SubmitButton = styled.button`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
   border: none;
   border-radius: 50px;
-  margin-top: 10%;
-  margin-left: 25%;
   cursor: pointer;
 `;
 
