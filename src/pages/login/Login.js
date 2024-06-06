@@ -32,14 +32,14 @@ const Login = () => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          id: data.id,
+          email: data.email,
           password: data.password
         })
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          throw new Error('일치하는 유저가 없습니다. 아이디와 비밀번호를 확인해주세요.');
+          throw new Error('일치하는 유저가 없습니다. 이메일과 비밀번호를 확인해주세요.');
         } else {
           throw new Error('로그인 실패');
         }
@@ -60,8 +60,8 @@ const Login = () => {
     <S.Background>
       <S.H1>로그인</S.H1>
       <form onSubmit={handleSubmit(handleLogin)}>
-        <S.Input type='text' placeholder='아이디를 입력해주세요' 
-          {...register("id", { required: true })} />
+        <S.Input type='email' placeholder='이메일을 입력해주세요' 
+          {...register("email", { required: true })} />
         <S.InputContainer>
           <S.PasswordContainer>
             <S.Input type={isPasswordShown ? 'text' : 'password'} placeholder='비밀번호를 입력해주세요' 

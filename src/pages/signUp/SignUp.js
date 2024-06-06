@@ -8,7 +8,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [domain, setDomain] = useState('@naver.com');
-  const [nickname, setNickname] = useState('');
+  const [nickName, setNickName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(null);
@@ -48,7 +48,7 @@ const SignUp = () => {
 
     const requestBody = {
       email: email + domain,
-      nickName: nickname,
+      nickName: nickName,
       password,
       address,
     };
@@ -79,7 +79,7 @@ const SignUp = () => {
   const checkNickname = async () => {
     try {
       const token = 'YOUR_AUTH_TOKEN'; 
-      const response = await fetch(`https://www.catchhealth.shop/api/v1/members/check-nickname?nickname=${nickname}`, {
+      const response = await fetch(`https://www.catchhealth.shop/api/v1/members/check-nickname?nickName=${nickName}`, {
         headers: {
           'Authorization': `Bearer ${token}`, 
         },
@@ -121,9 +121,9 @@ const SignUp = () => {
       <S.FormContainer>
         <S.Form onSubmit={handleSubmit}>
         <S.NicknameIdContainer>
-            <S.Label htmlFor="nickname">닉네임</S.Label>
+            <S.Label htmlFor="nickName">닉네임</S.Label>
             <S.NicknameInputWrapper>
-              <S.Input id="nickname" type='text' value={nickname} onChange={(e) => setNickname(e.target.value)} />
+              <S.Input id="nickName" type='text' value={nickName} onChange={(e) => setNickName(e.target.value)} />
               <S.OverlapButton type="button" onClick={checkNickname}>중복확인</S.OverlapButton>
             </S.NicknameInputWrapper>
             {nicknameMessage && <S.Message color='green'>{nicknameMessage}</S.Message>}
