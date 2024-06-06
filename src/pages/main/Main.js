@@ -29,14 +29,17 @@ export default function Main() {
       navigate("/login");
     }
   };
-
+  // 임시 로그아웃버튼으로 사용
   const handleProfileClick = () => {
-    if (loggedIn === true) {
-      navigate("/mypage");
-    } else {
-      alert("먼저 로그인을 해주세요 !");
-      navigate("/login");
-    }
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("token");
+    navigate("/");
+    // if (loggedIn === true) {
+    //   navigate("/mypage");
+    // } else {
+    //   alert("먼저 로그인을 해주세요 !");
+    //   navigate("/login");c
+    // }
   };
 
   return (
