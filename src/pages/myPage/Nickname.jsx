@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './style.js';
 
 const Nickname = ({ initialNickname, updateNickname }) => {
   const [nickname, setNickname] = useState(initialNickname);
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setNickname(initialNickname);
+  }, [initialNickname]);
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
@@ -11,7 +15,7 @@ const Nickname = ({ initialNickname, updateNickname }) => {
 
   const toggleEdit = () => {
     if (isEditing) {
-      updateNickname(nickname); 
+      updateNickname(nickname);
     }
     setIsEditing(!isEditing);
   };

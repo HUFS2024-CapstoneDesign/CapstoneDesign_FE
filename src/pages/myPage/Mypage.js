@@ -5,6 +5,8 @@ import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import PetRecord from './PetRecord.jsx';
 import Nickname from './Nickname.jsx';
+import ConfirmDialog from './ConfirmDialog.jsx';
+import Address from './Address.jsx';
 
 const Mypage = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -13,7 +15,7 @@ const Mypage = () => {
   const [nickname, setNickname] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
-  const [address, setAddress] = useState("서울특별시 강남구 대치동 ㅇㅇ아파트 101동 101호");
+  const [address, setAddress] = useState(""); 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
   const [petRecords, setPetRecords] = useState([
@@ -44,53 +46,95 @@ const Mypage = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('https://www.catchhealth.shop/api/v1/members/login'); 
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+          console.error("토큰이 없습니다.");
+          return;
+        }
+        
+        const response = await fetch('https://www.catchhealth.shop/api/v1/members/', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
         const data = await response.json();
-        setNickname(data.nickName); 
+        if (data.isSuccess) {
+          setNickname(data.data.nickName);
+          setAddress(data.data.address);
+        } else {
+          console.error("회원 정보 조회 실패: ", data.message);
+        }
       } catch (error) {
         console.error("로그인 정보를 불러오는데 실패했습니다.", error);
       }
     };
-
+  
     fetchUserInfo();
   }, []);
+  
 
   const updateNickname = async (newNickname) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error("토큰이 없습니다.");
+      return;
+    }
+  
     try {
-      const response = await fetch('/api/v1/members/nickname', {
+      const response = await fetch('https://www.catchhealth.shop/api/v1/members/set-nickname', {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nickname: newNickname }),
+        body: JSON.stringify({ nickName: newNickname }),
       });
-      if (response.ok) {
-        alert('닉네임이 성공적으로 변경되었습니다.');
+  
+      const data = await response.json();
+  
+      if (data.isSuccess) {
         setNickname(newNickname);
       } else {
-        alert('닉네임 변경에 실패했습니다.');
+        console.error("닉네임 변경 실패: ", data.message);
       }
     } catch (error) {
-      alert('닉네임 변경에 실패했습니다.');
-      console.error("닉네임을 업데이트하는데 실패했습니다.", error);
+      console.error("닉네임 변경 중 오류가 발생했습니다.", error);
     }
   };
 
-  // const handleNicknameChange = (event) => {
-  //   setNickname(event.target.value);
-  // };
+  const updateAddress = async (newAddress) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error("토큰이 없습니다.");
+      return;
+    }
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
+    try {
+      const response = await fetch('https://www.catchhealth.shop/api/v1/members/set-address', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address: newAddress }),
+      });
 
-  const toggleEdit = () => {
-    setIsEditing(!isEditing);
-  };
+      const data = await response.json();
 
-  const toggleEditAddress = () => {
-    setIsEditingAddress(!isEditingAddress);
+      if (data.isSuccess) {
+        setAddress(newAddress); 
+      } else {
+        console.error("주소 변경 실패: ", data.message);
+      }
+    } catch (error) {
+      console.error("주소 변경 중 오류가 발생했습니다.", error);
+    }
   };
+  
 
   const handleRecordClick = (id) => {
     const newSelectedRecordIds = selectedRecordIds.includes(id)
@@ -104,6 +148,72 @@ const Mypage = () => {
       setPetRecords(petRecords.filter(record => !selectedRecordIds.includes(record.id)));
       setSelectedRecordIds([]);
     }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+  
+      const response = await fetch('https://www.catchhealth.shop/api/v1/members/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        alert('성공적으로 로그아웃되었습니다.');
+        localStorage.removeItem('token'); 
+        localStorage.removeItem('loggedIn'); 
+        window.location.href = '/login'; 
+      } else {
+        alert('로그아웃에 실패했습니다.');
+      }
+    } catch (error) {
+      alert('로그아웃에 실패했습니다.');
+      console.error("로그아웃 처리 중 오류가 발생했습니다.", error);
+    }
+  };
+  
+  
+
+  const handleConfirmDelete = async () => {
+    try {
+      const token = localStorage.getItem('token');
+  
+      const response = await fetch('https://www.catchhealth.shop/api/v1/members/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (response.ok) {
+        alert('회원 탈퇴가 성공적으로 처리되었습니다.');
+        localStorage.removeItem('token'); 
+        localStorage.removeItem('loggedIn'); 
+        window.location.href = '/'; 
+      } else {
+        alert('회원 탈퇴에 실패했습니다.');
+      }
+    } catch (error) {
+      alert('회원 탈퇴 처리 중 오류가 발생했습니다.');
+      console.error("회원 탈퇴 처리 중 오류가 발생했습니다.", error);
+    }
+    setIsDialogOpen(false); 
+  };
+  
+
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDeleteAccountClick = () => {
+    setIsDialogOpen(true); 
+  };
+  
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -128,35 +238,13 @@ const Mypage = () => {
         </S.ProfileContainer>
         
         <S.NicknameContainer>
-          {/* {isEditing ? (
-            <>
-              <S.NicknameInput value={nickname} onChange={handleNicknameChange} />
-              <S.EditButton onClick={toggleEdit} isEditing={isEditing}>수정 완료</S.EditButton>
-            </>
-          ) : (
-            <>
-              <span style={{ fontSize: '20px' }}>{nickname}</span>
-              <S.EditButton onClick={toggleEdit} isEditing={isEditing}>수정</S.EditButton>
-            </>
-            
-          )} */}
-          <Nickname initialNickname={nickname} updateNickname={updateNickname} />
+        <Nickname initialNickname={nickname} updateNickname={updateNickname} />
         </S.NicknameContainer>
         </S.ProfileNicknameContainer>
        
         <div style={{ fontSize: '15px', marginRight : "40%"}}>내 주소지</div>
         <S.AddressContainer>
-          {isEditingAddress ? (
-            <>
-              <S.AddressInput value={address} onChange={handleAddressChange} />
-              <S.EditButton onClick={toggleEditAddress} isEditing={isEditingAddress}>수정 완료</S.EditButton>
-            </>
-          ) : (
-            <>
-              <span style={{ fontSize: '20px' }}>{address}</span>
-              <S.EditButton onClick={toggleEditAddress} isEditing={isEditingAddress}>수정</S.EditButton>
-            </>
-          )}
+         <Address initialAddress={address} updateAddress={updateAddress}/>
         </S.AddressContainer>
         <div style={{ fontSize: '15px', marginRight : "36%"}}>이전 진료 기록</div>
         <PetRecord
@@ -164,6 +252,15 @@ const Mypage = () => {
           handleRecordClick={handleRecordClick}
           selectedRecordIds={selectedRecordIds}
           handleDeleteRecord={handleDeleteRecord}
+        />
+        <div style={{marginLeft : "50%"}}>
+         <S.LogoutButton onClick={handleLogout}>로그아웃</S.LogoutButton>
+         <S.LogoutButton onClick={handleDeleteAccountClick}>회원 탈퇴</S.LogoutButton>
+         </div>
+        <ConfirmDialog
+          isOpen={isDialogOpen}
+          onClose={handleCloseDialog}
+          onConfirm={handleConfirmDelete}
         />
       </S.MainContainer>
     </S.Background>
