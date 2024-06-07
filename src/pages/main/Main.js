@@ -30,16 +30,16 @@ export default function Main() {
     }
   };
   // 임시 로그아웃버튼으로 사용
+  // localStorage.removeItem("loggedIn");
+  // localStorage.removeItem("token");
+  // navigate("/");
   const handleProfileClick = () => {
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("token");
-    navigate("/");
-    // if (loggedIn === true) {
-    //   navigate("/mypage");
-    // } else {
-    //   alert("먼저 로그인을 해주세요 !");
-    //   navigate("/login");c
-    // }
+    if (loggedIn === true) {
+      navigate("/mypage");
+    } else {
+      alert("먼저 로그인을 해주세요 !");
+      navigate("/login");
+    }
   };
 
   return (
