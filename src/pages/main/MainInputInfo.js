@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import defaultProfile from "./defaultProfile.png";
@@ -8,24 +8,19 @@ import mobileDefaultProfile from "./mobileDefaultProfile.png";
 const MainInputInfo = () => {
   const [petName, setPetName] = useState("");
   const navigate = useNavigate();
-  console.log("토큰" + localStorage.getItem("token"));
-  const handleClick = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
+  const [token, setToken] = useState(null);
 
+  const handleClick = async () => {
     const petData = {
       name: petName,
-      age: null,
-      species: null,
-      gender: null,
+      gender: "M",
+      age: 0,
+      species: "cat",
     };
 
     try {
-      const response = await fetch("https://www.catchhealth.shop/api/v1/pets/", {
+      console.log(`토큰--> ${token}`);
+      const response = await fetch("https://www.catchhealth.shop/api/v1/pets", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,18 +30,29 @@ const MainInputInfo = () => {
       });
 
       if (!response.ok) {
-        throw new Error("애완동물 등록 실패");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "애완동물 등록 실패");
       }
 
       const result = await response.json();
       console.log(result);
       alert("애완동물 등록 성공");
-      navigate("/upload"); // 등록 성공 후 /diseaseResult 페이지로 이동
+      navigate("/upload");
     } catch (error) {
       console.error("애완동물 등록 중 에러 발생:", error);
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
+    }
+    setToken(token);
+  }, []);
 
   return (
     <div>
