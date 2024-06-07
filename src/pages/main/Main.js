@@ -29,13 +29,13 @@ export default function Main() {
       navigate("/login");
     }
   };
-  // 임시 로그아웃버튼으로 사용
-  // localStorage.removeItem("loggedIn");
-  // localStorage.removeItem("token");
-  // navigate("/");
+
   const handleProfileClick = () => {
     if (loggedIn === true) {
       navigate("/mypage");
+      // 임시 로그아웃버튼으로 사용
+      // localStorage.removeItem("loggedIn");
+      // localStorage.removeItem("token");
     } else {
       alert("먼저 로그인을 해주세요 !");
       navigate("/login");
@@ -46,7 +46,7 @@ export default function Main() {
     <div>
       <BrowserView>
         <div id="MainWrapper">
-          <Link id="defaultProfile" to="/mypage" onClick={handleProfileClick}>
+          <Link id="defaultProfile" onClick={handleProfileClick}>
             <img src={defaultProfile} alt="profile" />
           </Link>
           <div id="introTextWrapper">
