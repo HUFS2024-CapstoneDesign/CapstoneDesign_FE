@@ -8,23 +8,26 @@ import mobileDefaultProfile from "./mobileDefaultProfile.png";
 const MainInputInfo = () => {
   const [petName, setPetName] = useState("");
   const navigate = useNavigate();
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
 
   const handleClick = async () => {
     const petData = {
       name: petName,
-      gender: "M",
+      gender: "F",
       age: 0,
       species: "cat",
     };
 
+    console.log("Sending pet data: ", JSON.stringify(petData));
+
     try {
       console.log(`토큰--> ${token}`);
+
       const response = await fetch("https://www.catchhealth.shop/api/v1/pets", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify(petData),
       });
