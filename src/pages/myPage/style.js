@@ -18,7 +18,7 @@ S.MainContainer = styled.div`
   align-items: center;
   gap: 30px;
   margin-right: 50%;
-  margin-top: 30%;
+  margin-top: 40%;
 `;
 
 S.ProfileNicknameContainer = styled.div`
@@ -74,11 +74,10 @@ S.EditButton = styled.button`
 `;
 
 
-
 S.AddressContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 30%;
+  margin-left: 15%;
   gap: 30px; 
   white-space: nowrap;
 `;
@@ -94,6 +93,7 @@ S.PetRecordContainer = styled.div`
   grid-auto-rows: auto;
   gap: 20px;
   position: relative;
+  margin-left: 25%;
 `;
 
 S.PetRecord = styled.div`
@@ -139,5 +139,75 @@ S.SelectButton = styled.button`
   top: 15px;
   right: 10px;
 `;
+
+
+S.ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+S.ModalWrapper = styled.div`
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+S.Modal = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  width: 500px;
+  & p{
+    margin-top: 100px;
+    text-align: center;
+    font-size: ${({ theme }) => theme.FONT_SIZE["default"]};
+    font-weight: ${({ theme }) => theme.FONT_WEIGHT["regular"]};
+  }
+`;
+
+S.Image = styled.img`
+  width: 240px;
+  height: 80px;
+`
+
+S.CancleButton = styled.button`
+  width: 150px;
+  height: 40px;
+  background-color: #81D4FA; 
+  color: #000;
+  font-size: ${({ theme }) => theme.FONT_SIZE["default"]};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin-top: 20px;
+  margin-left: 50px;
+`;
+
+S.ModalButtonContainer = styled.div`
+margin: 50px;
+`
+
+S.LogoutButton = styled.button`
+  font-size: ${({ theme }) => theme.FONT_SIZE["default"]};
+  font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
+  cursor: pointer;
+  border : none;
+  background-color: #fff;
+  margin: 30px;
+`
+
 
 export default S;

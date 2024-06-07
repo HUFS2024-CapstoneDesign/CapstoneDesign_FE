@@ -25,17 +25,15 @@ const ChangePassword = () => {
     setPasswordMatch(password === e.target.value);
   };
 
-  const location = useLocation();
-  // const query = new URLSearchParams(location.search);
-
   useEffect(() => {
-    const state = location.state;
-    if (state && state.token) {
-      setToken(state.token);
+    // localStorage에서 토큰 가져오기
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
     } else {
-      alert('토큰을 찾을 수 없습니다.');
+      alert('토큰을 찾을 수 없습니다. 다시 로그인해주세요.');
     }
-  }, [location]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +62,8 @@ const ChangePassword = () => {
 
       if (changePasswordResponse.ok) {
         alert('비밀번호가 성공적으로 변경되었습니다.');
+        // 비밀번호 변경 후 토큰 제거
+        localStorage.removeItem('token');
       } else {
         const errorResponse = await changePasswordResponse.json();
         alert(errorResponse.message || '비밀번호 변경에 실패했습니다.');
@@ -72,7 +72,6 @@ const ChangePassword = () => {
       alert('네트워크 오류가 발생했습니다.');
     }
   };
-
 
   return (
     <S.Background>

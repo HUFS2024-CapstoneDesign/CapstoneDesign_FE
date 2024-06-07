@@ -25,36 +25,43 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     try {
-      const response = await fetch('https://www.catchhealth.shop/api/v1/members/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password
-        })
-      });
+        const response = await fetch('https://www.catchhealth.shop/api/v1/members/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                email: data.email,
+                password: data.password
+            })
+        });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error('일치하는 유저가 없습니다. 이메일과 비밀번호를 확인해주세요.');
-        } else {
-          throw new Error('로그인 실패');
+        if (!response.ok) {
+            if (response.status === 401) {
+                throw new Error('일치하는 유저가 없습니다. 이메일과 비밀번호를 확인해주세요.');
+            } else {
+                throw new Error('로그인 실패');
+            }
         }
-      }
 
-      const result = await response.json();
-      console.log(result);
-      alert('로그인 성공');
-      localStorage.setItem('loggedIn', true); 
-      navigate('/');
+        const result = await response.json();
+        console.log(result);
+        
+        if (result.isSuccess) {
+            alert('로그인 성공');
+            localStorage.setItem('loggedIn', true); 
+            localStorage.setItem('token', result.data.accessToken);
+            navigate('/');
+        } else {
+            throw new Error(result.message || '로그인 실패');
+        }
     } catch (error) {
-      console.error('로그인 중 에러 발생:', error);
-      alert(error.message);
+        console.error('로그인 중 에러 발생:', error);
+        alert(error.message);
     }
-  };
+};
+
 
   return (
     <S.Background>

@@ -1,70 +1,99 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import S from './style.js';
+import { useNavigate } from 'react-router-dom';
 
-const ChangePassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const Identification = () => {
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
-  const { email, token } = location.state || {};
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
+  const handleCodeChange = (e) => {
+    setCode(e.target.value);
   };
 
-  const changePassword = () => {
-    if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
+  const sendCode = () => {
+    if (!email) {
+      alert('이메일을 입력해주세요.');
       return;
     }
-
-    fetch('https://www.catchhealth.shop/api/v1/members/change-password', {
-      method: 'PUT',
+    fetch('https://www.catchhealth.shop/api/v1/members/find-password', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          alert('인증번호가 발송되었습니다.');
+        } else {
+          const errorResponse = await response.json();
+          alert(errorResponse.message || '인증번호 발송에 실패했습니다.');
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const checkCode = () => {
+    fetch('https://www.catchhealth.shop/api/v1/members/check-code', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, code }),
     })
     .then(async (response) => {
       if (response.ok) {
-        alert('비밀번호가 성공적으로 변경되었습니다.');
-        navigate('/login');
+        const jsonResponse = await response.json();
+        const token = jsonResponse.data;
+        if (token) {
+          localStorage.setItem('token', token); 
+          alert('인증번호가 확인되었습니다. 비밀번호를 변경해주세요.');
+          navigate('/changepassword', { state: { email, token } });
+        } else {
+          alert('토큰이 없습니다. 서버 응답을 확인하세요.');
+        }
       } else {
         const errorResponse = await response.json();
-        alert(errorResponse.message || '비밀번호 변경에 실패했습니다.');
+        alert(errorResponse.message || '인증번호가 잘못되었습니다.');
       }
     })
     .catch((error) => {
       alert(error.message);
     });
   };
+  
 
   return (
     <S.Background>
-      <S.H1>비밀번호 변경</S.H1>
+      <S.H1>비밀번호 찾기</S.H1>
       <S.InputContainer>
+        <S.IdContainer>
+          <S.IdInput
+            type='text'
+            placeholder='이메일을 입력해주세요'
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <S.OverlapButton onClick={sendCode}>인증번호 발송</S.OverlapButton>
+        </S.IdContainer>
         <S.Input
-          type='password'
-          placeholder='새 비밀번호'
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <S.Input
-          type='password'
-          placeholder='새 비밀번호 확인'
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
+          type='text'
+          placeholder='인증번호'
+          value={code}
+          onChange={handleCodeChange}
         />
       </S.InputContainer>
-      <S.SubmitButton onClick={changePassword}>변경</S.SubmitButton>
+      <S.SubmitButton onClick={checkCode}>확인</S.SubmitButton>
     </S.Background>
   );
 };
 
-export default ChangePassword;
+export default Identification;
+
