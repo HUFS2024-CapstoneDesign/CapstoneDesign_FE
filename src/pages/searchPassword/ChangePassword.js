@@ -26,7 +26,6 @@ const ChangePassword = () => {
   };
 
   useEffect(() => {
-    // localStorage에서 토큰 가져오기
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
@@ -62,7 +61,6 @@ const ChangePassword = () => {
 
       if (changePasswordResponse.ok) {
         alert('비밀번호가 성공적으로 변경되었습니다.');
-        // 비밀번호 변경 후 토큰 제거
         localStorage.removeItem('token');
       } else {
         const errorResponse = await changePasswordResponse.json();

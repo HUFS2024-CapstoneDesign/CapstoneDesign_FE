@@ -17,7 +17,7 @@ S.MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  margin-right: 50%;
+  margin-right: 20%;
   margin-top: 40%;
 `;
 
