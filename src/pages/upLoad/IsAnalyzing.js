@@ -7,38 +7,43 @@ const IsAnalyzing = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // API 호출을 통해 회원 정보를 가져오는 함수
     const fetchUserInfo = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://www.catchhealth.shop/api/v1/members/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("회원 정보를 가져오는데 실패했습니다.");
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+          console.error("토큰이 없습니다.");
+          return;
         }
-
+        
+        const response = await fetch('https://www.catchhealth.shop/api/v1/members/', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
         const data = await response.json();
-        setUserName(data.nickName || "사용자"); // nickname이 없는 경우 "사용자"로 설정
+        if (data.isSuccess) {
+          setUserName(data.data.nickName);
+        } else {
+          console.error("회원 정보 조회 실패: ", data.message);
+        }
       } catch (error) {
-        console.error("회원 정보를 가져오는 중 에러 발생:", error);
-        alert(error.message);
+        console.error("로그인 정보를 불러오는데 실패했습니다.", error);
       }
     };
 
     fetchUserInfo();
-
+    
     const timer = setTimeout(() => {
       navigate("/diseaseResult");
     }, 4000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
+
 
   return (
     <div id="analyzingWrapper">
