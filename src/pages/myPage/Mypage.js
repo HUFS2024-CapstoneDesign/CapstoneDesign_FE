@@ -9,22 +9,10 @@ import ConfirmDialog from './ConfirmDialog.jsx';
 import Address from './Address.jsx';
 
 const Mypage = () => {
+
+  //프로필 사진
   const [profileImage, setProfileImage] = useState(null);
   const fileInputRef = useRef(null);
-
-  const [nickname, setNickname] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-
-  const [address, setAddress] = useState(""); 
-  const [isEditingAddress, setIsEditingAddress] = useState(false);
-
-  const [petRecords, setPetRecords] = useState([
-    { id: 1, name: '또리', gender: '남', age: '5세', type: '코리안숏헤어', diagnosis: '결막염' , date : '2023.10.22' },
-    { id: 2, name: '레미', gender: '여', age: '7세', type: '페르시안', diagnosis: '안검내반증' , date : '2021.08.10'},
-    { id: 3, name: '초코', gender: '남', age: '13세', type: '스코티시폴드', diagnosis: '결막염', date: '2023.10.22' }
-  ]);
-  const [selectedRecordIds, setSelectedRecordIds] = useState([]);
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -42,6 +30,9 @@ const Mypage = () => {
     fileInputRef.current.click();
   };
 
+
+  const [nickname, setNickname] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -76,7 +67,7 @@ const Mypage = () => {
     fetchUserInfo();
   }, []);
   
-
+  //닉네임 수정
   const updateNickname = async (newNickname) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -106,6 +97,10 @@ const Mypage = () => {
     }
   };
 
+  //주소 수정
+  const [address, setAddress] = useState(""); 
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+
   const updateAddress = async (newAddress) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -134,7 +129,48 @@ const Mypage = () => {
       console.error("주소 변경 중 오류가 발생했습니다.", error);
     }
   };
-  
+
+  //진료 기록 삭제하기
+  const [petRecords, setPetRecords] = useState([
+    { id: 1, name: '또리', gender: '남', age: '5세', type: '코리안숏헤어', diagnosis: '결막염' , date : '2023.10.22' },
+    { id: 2, name: '레미', gender: '여', age: '7세', type: '페르시안', diagnosis: '안검내반증' , date : '2021.08.10'},
+    { id: 3, name: '초코', gender: '남', age: '13세', type: '스코티시폴드', diagnosis: '결막염', date: '2023.10.22' }
+  ]);
+  const [selectedRecordIds, setSelectedRecordIds] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false); 
+
+  // const [petRecords, setPetRecords] = useState([]);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+
+  //   fetch('https://www.catchhealth.shop/api/v1/pets/', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Authorization': `Bearer ${token}`,
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     if (data.isSuccess) {
+  //       setPetRecords(data.data.map(pet => ({
+  //         name: pet.name,
+  //         gender: pet.gender === 'F' ? '여' : '남',
+  //         age: `${pet.age}세`,
+  //         type: pet.species, 
+  //         diagnosis: pet.diagnosisList.map(diagnosis => diagnosis.diseaseName).join(', '), 
+  //         date: pet.diagnosisList.map(diagnosis => diagnosis.createdAt).join(', '), 
+  //       })));
+  //     } else {
+  //       console.error('Failed to fetch pet records');
+  //     }
+  //   })
+  //   .catch(error => {
+  //     console.error('Error:', error);
+  //   });
+  // }, []);
+
 
   const handleRecordClick = (id) => {
     const newSelectedRecordIds = selectedRecordIds.includes(id)
@@ -143,12 +179,46 @@ const Mypage = () => {
     setSelectedRecordIds(newSelectedRecordIds);
   };
 
+
   const handleDeleteRecord = () => {
-    if (selectedRecordIds.length > 0) {
-      setPetRecords(petRecords.filter(record => !selectedRecordIds.includes(record.id)));
-      setSelectedRecordIds([]);
+    if (!isDeleting) {
+      setIsDeleting(true); 
+    } else {
+      if (selectedRecordIds.length > 0) {
+        setPetRecords(petRecords.filter(record => !selectedRecordIds.includes(record.id)));
+        setSelectedRecordIds([]);
+      }
+      setIsDeleting(false); 
     }
   };
+
+  // const handleDeleteRecord = async () => {
+
+  //   if (!isDeleting) {
+  //     setIsDeleting(true); 
+  //   } else {
+  //     if (selectedRecordIds.length > 0) {
+  //       try {
+  //         await Promise.all(selectedRecordIds.map(async (id) => {
+  //           const response = await fetch(`https://www.catchhealth.shop/api/v1/diagnosis/delete/${id}`, {
+  //             method: 'DELETE'
+  //           });
+  //           if (!response.ok) {
+  //             throw new Error('삭제 실패');
+  //           }
+  //         }));
+  //         setPetRecords(petRecords.filter(record => !selectedRecordIds.includes(record.id)));
+  //         setSelectedRecordIds([]);
+  //       } catch (error) {
+  //         console.error('삭제 중 오류 발생:', error);
+  //       }
+  //     }
+  //     setIsDeleting(false); 
+  //   }
+  // };
+
+
+  //로그아웃
 
   const handleLogout = async () => {
     try {
@@ -176,7 +246,7 @@ const Mypage = () => {
   };
   
   
-
+  //회원탈퇴
   const handleConfirmDelete = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -242,16 +312,17 @@ const Mypage = () => {
         </S.NicknameContainer>
         </S.ProfileNicknameContainer>
        
-        <div style={{ fontSize: '15px', marginRight : "40%"}}>내 주소지</div>
+        <div style={{ fontSize: '15px', marginRight : "30%"}}>내 주소지</div>
         <S.AddressContainer>
          <Address initialAddress={address} updateAddress={updateAddress}/>
         </S.AddressContainer>
-        <div style={{ fontSize: '15px', marginRight : "36%"}}>이전 진료 기록</div>
+        <div style={{ fontSize: '15px', marginRight : "27%"}}>이전 진료 기록</div>
         <PetRecord
           petRecords={petRecords}
           handleRecordClick={handleRecordClick}
           selectedRecordIds={selectedRecordIds}
           handleDeleteRecord={handleDeleteRecord}
+          isDeleting={isDeleting} 
         />
         <div style={{marginLeft : "50%"}}>
          <S.LogoutButton onClick={handleLogout}>로그아웃</S.LogoutButton>
