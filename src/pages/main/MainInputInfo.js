@@ -12,10 +12,10 @@ const MainInputInfo = () => {
 
   const handleClick = async () => {
     const petData = {
-      name: petName,
-      gender: "F",
-      age: 0,
-      species: "cat",
+      "name": petName,
+      "gender": "M",
+      "age": 0,
+      "species": "cat",
     };
 
     console.log("Sending pet data: ", JSON.stringify(petData));
@@ -26,8 +26,8 @@ const MainInputInfo = () => {
       const response = await fetch("https://www.catchhealth.shop/api/v1/pets", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          'Content-Type': "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(petData),
       });
