@@ -1,5 +1,5 @@
 import React from 'react';
-import S from './style.js'; // 실제 경로에 맞게 조정
+import S from './style.js'; 
 
 const PetRecord = ({ petRecords, handleRecordClick, selectedRecordIds, handleDeleteRecord, isDeleting }) => {
   return (
@@ -14,10 +14,10 @@ const PetRecord = ({ petRecords, handleRecordClick, selectedRecordIds, handleDel
           <div>나이 : {record.age}</div>
           <div>종류 : {record.type}</div>
           <div>이전 진단 내역: {record.diagnosis}</div>
-          <div>진단 날짜: {record.date}</div>
+          <div>진단 날짜: {record.createdAt}</div>
           {isDeleting && <S.SelectButton
             onClick={(e) => {
-              e.stopPropagation(); // 이벤트 버블링 방지
+              e.stopPropagation(); 
               handleRecordClick(record.id);
             }}
             selected={selectedRecordIds.includes(record.id)}

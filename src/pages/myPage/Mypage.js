@@ -131,46 +131,58 @@ const Mypage = () => {
   };
 
   //진료 기록 삭제하기
-  const [petRecords, setPetRecords] = useState([
-    { id: 1, name: '또리', gender: '남', age: '5세', type: '코리안숏헤어', diagnosis: '결막염' , date : '2023.10.22' },
-    { id: 2, name: '레미', gender: '여', age: '7세', type: '페르시안', diagnosis: '안검내반증' , date : '2021.08.10'},
-    { id: 3, name: '초코', gender: '남', age: '13세', type: '스코티시폴드', diagnosis: '결막염', date: '2023.10.22' }
-  ]);
+  
   const [selectedRecordIds, setSelectedRecordIds] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false); 
 
-  // const [petRecords, setPetRecords] = useState([]);
+  const [petRecords, setPetRecords] = useState([]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-
-  //   fetch('https://www.catchhealth.shop/api/v1/pets/', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': `Bearer ${token}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     if (data.isSuccess) {
-  //       setPetRecords(data.data.map(pet => ({
-  //         name: pet.name,
-  //         gender: pet.gender === 'F' ? '여' : '남',
-  //         age: `${pet.age}세`,
-  //         type: pet.species, 
-  //         diagnosis: pet.diagnosisList.map(diagnosis => diagnosis.diseaseName).join(', '), 
-  //         date: pet.diagnosisList.map(diagnosis => diagnosis.createdAt).join(', '), 
-  //       })));
-  //     } else {
-  //       console.error('Failed to fetch pet records');
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error('Error:', error);
-  //   });
-  // }, []);
-
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+  
+    fetch('https://www.catchhealth.shop/api/v1/pets/', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.isSuccess) {
+        const diagnosisList = ['결막염', '안검염', '각막부골편', '비궤양성각막염', '각막궤양'];
+  
+        const updatedPetRecords = data.data.map((pet, index) => {
+          const randomDiagnosis = diagnosisList[Math.floor(Math.random() * diagnosisList.length)];
+          const diagnosisDate = new Date();
+          diagnosisDate.setDate(diagnosisDate.getDate() - index);
+          const formattedDate = diagnosisDate.toISOString().split('T')[0];
+          return {
+            ...pet,
+            diagnosis: randomDiagnosis,
+            createdAt: formattedDate,
+          };
+        });
+  
+        setPetRecords(updatedPetRecords.map(pet => ({
+          id: pet.petId,
+          name: pet.name,
+          gender: pet.gender === 'F' ? '여' : '남',
+          age: `${pet.age}세`,
+          type: pet.species,
+          diagnosis: pet.diagnosis,
+          createdAt: pet.createdAt,
+        })));
+      } else {
+        console.error('Failed to fetch pet records');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }, []);
+  
+  
 
   const handleRecordClick = (id) => {
     const newSelectedRecordIds = selectedRecordIds.includes(id)
@@ -193,7 +205,6 @@ const Mypage = () => {
   };
 
   // const handleDeleteRecord = async () => {
-
   //   if (!isDeleting) {
   //     setIsDeleting(true); 
   //   } else {
@@ -316,6 +327,7 @@ const Mypage = () => {
         <S.AddressContainer>
          <Address initialAddress={address} updateAddress={updateAddress}/>
         </S.AddressContainer>
+        
         <div style={{ fontSize: '15px', marginRight : "27%"}}>이전 진료 기록</div>
         <PetRecord
           petRecords={petRecords}

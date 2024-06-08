@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import S from './style.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 
 const ChangePassword = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -10,6 +11,8 @@ const ChangePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(null);
   const [token, setToken] = useState(null);
+
+  const navigate = useNavigate();
 
   const togglePasswordVisiblity = () => {
     setIsPasswordShown(!isPasswordShown);
@@ -62,6 +65,7 @@ const ChangePassword = () => {
       if (changePasswordResponse.ok) {
         alert('비밀번호가 성공적으로 변경되었습니다.');
         localStorage.removeItem('token');
+        navigate('/login')
       } else {
         const errorResponse = await changePasswordResponse.json();
         alert(errorResponse.message || '비밀번호 변경에 실패했습니다.');
