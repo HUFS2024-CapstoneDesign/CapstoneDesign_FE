@@ -12,6 +12,7 @@ export default function Main() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
+    localStorage.removeItem("petName");
     // localStorage에서 로그인 상태를 가져와서 state에 설정
     const loggedInStatus = localStorage.getItem("loggedIn");
     if (loggedInStatus === "true") {

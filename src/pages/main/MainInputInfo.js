@@ -13,6 +13,7 @@ const MainInputInfo = () => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
+    localStorage.setItem('petName', petName); 
     const petData = {
       name: petName,
       gender: petGender,

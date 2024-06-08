@@ -9,8 +9,8 @@ const DiseaseResult = () => {
   const [hasDisease, setHasDisease] = useState(true);
   const [disease, setDisease] = useState("결막염");
   const navigate = useNavigate();
-  const petName = "또리";
-
+  const [petName, setPetName] = useState("또리");
+  
   const renderTextWithLineBreaks = (text) => {
     return text.split("\n").map((line, index) => (
       <React.Fragment key={index}>
@@ -27,19 +27,9 @@ const DiseaseResult = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   // 서버에서 병명을 전달받는 API 호출
-  //   fetch('/api/getDisease')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setDisease(data.disease);
-  //       setHasDisease(true); // 질병이 있는 경우 true로 설정
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching disease data:', error);
-  //       setHasDisease(false); // 오류가 발생하면 false로 설정
-  //     });
-  // }, []);
+  useEffect(() => {
+    setPetName(localStorage.getItem("petName"));
+  }, []);
 
   const getDiseaseInfo = (diseaseName) => {
     if (!diseasesData) return null;
