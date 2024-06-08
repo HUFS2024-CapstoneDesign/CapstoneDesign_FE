@@ -11,6 +11,7 @@ const MainInputInfo = () => {
   const [token, setToken] = useState("");
 
   const handleClick = async () => {
+    
     const petData = {
       "name": petName,
       "gender": "M",
@@ -21,18 +22,26 @@ const MainInputInfo = () => {
     console.log("Sending pet data: ", JSON.stringify(petData));
 
     try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        navigate("/login");
+        return;
+      }
       console.log(`토큰--> ${token}`);
 
-      const response = await fetch("https://www.catchhealth.shop/api/v1/pets", {
-        method: "POST",
+      const response = await fetch("https://www.catchhealth.shop/api/v1/pets/", {
+        method: 'POST',
         headers: {
-          'Content-Type': "application/json",
           'Authorization': `Bearer ${token}`,
+          'Content-Type': "application/json",
         },
         body: JSON.stringify(petData),
       });
 
       if (!response.ok) {
+        console.error("응답 상태 코드:", response.status);
         const errorData = await response.json();
         throw new Error(errorData.message || "애완동물 등록 실패");
       }
@@ -47,15 +56,15 @@ const MainInputInfo = () => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
-    setToken(token);
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     alert("로그인이 필요합니다.");
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   setToken(token);
+  // }, []);
 
   return (
     <div>
