@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import defaultProfile from "./defaultProfile.png";
@@ -7,16 +7,17 @@ import mobileDefaultProfile from "./mobileDefaultProfile.png";
 
 const MainInputInfo = () => {
   const [petName, setPetName] = useState("");
+  const [petGender, setPetGender] = useState("");
+  const [petAge, setPetAge] = useState("");
+  const [petSpecies, setPetSpecies] = useState("");
   const navigate = useNavigate();
-  const [token, setToken] = useState("");
 
   const handleClick = async () => {
-    
     const petData = {
-      "name": petName,
-      "gender": "M",
-      "age": 0,
-      "species": "cat",
+      name: petName,
+      gender: petGender,
+      age: petAge,
+      species: petSpecies,
     };
 
     console.log("Sending pet data: ", JSON.stringify(petData));
@@ -56,29 +57,66 @@ const MainInputInfo = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     alert("로그인이 필요합니다.");
-  //     navigate("/login");
-  //     return;
-  //   }
-  //   setToken(token);
-  // }, []);
+  const handleAgeChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || isNaN(Number(value))) {
+      setPetAge("");
+    } else {
+      setPetAge(Number(value));
+    }
+  };  
 
   return (
     <div>
       <BrowserView>
         <div id="MainInputInfoWrapper">
-          <Link id="defaultProfile" to="/profile">
-            <img src={defaultProfile} alt="profile" />
-          </Link>
-          <h1>애완동물의 이름을 입력해 주세요.</h1>
-          <input id="nameInput" type="text" placeholder="이름을 입력해 주세요" value={petName} onChange={(e) => setPetName(e.target.value)} />
-          <p>이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요!</p>
-          <button onClick={handleClick} id="diagnoseButton">
-            진단받기
-          </button>
+          <div>
+            <h1>애완동물의 정보을 입력해 주세요!</h1>
+            </div>
+          <div className="inputWrapper">
+            <input
+              id="nameInput"
+              type="text"
+              placeholder="이름"
+              value={petName}
+              onChange={(e) => setPetName(e.target.value)}
+            />
+          </div>
+          <div className="inputWrapper">
+            <input
+              id="genderInput"
+              type="text"
+              placeholder="성별(M/F)"
+              value={petGender}
+              onChange={(e) => setPetGender(e.target.value)}
+            />
+          </div>
+          <div className="inputWrapper">
+            <input
+              id="ageInput"
+              type="text"
+              placeholder="나이"
+              value={petAge}
+              onChange={(e) => setPetAge(e.target.value)}
+            />
+          </div>
+          <div className="inputWrapper">
+            <input
+              id="speciesInput"
+              type="text"
+              placeholder="종"
+              value={petSpecies}
+              onChange={(e) => setPetSpecies(e.target.value)}
+            />
+          </div>
+          <div>
+            <p>이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요!</p>
+          </div>
+          <div>
+            <button onClick={handleClick} id="diagnoseButton">
+              진단받기
+            </button>
+          </div>
         </div>
       </BrowserView>
       <MobileView>
@@ -89,7 +127,43 @@ const MainInputInfo = () => {
           <div id="h1Wrapper">
             <h1>애완동물의 이름을 입력해 주세요.</h1>
           </div>
-          <input id="nameInput" type="text" placeholder="이름을 입력해 주세요" value={petName} onChange={(e) => setPetName(e.target.value)} />
+          <input
+            id="nameInput"
+            type="text"
+            placeholder="이름을 입력해 주세요"
+            value={petName}
+            onChange={(e) => setPetName(e.target.value)}
+          />
+          <div id="h1Wrapper">
+            <h1>애완동물의 성별을 입력해 주세요.</h1>
+          </div>
+          <input
+            id="genderInput"
+            type="text"
+            placeholder="성별을 입력해 주세요 (M/F)"
+            value={petGender}
+            onChange={(e) => setPetGender(e.target.value)}
+          />
+          <div id="h1Wrapper">
+            <h1>애완동물의 나이를 입력해 주세요.</h1>
+          </div>
+          <input
+            id="ageInput"
+            type="text"
+            placeholder="나이를 입력해 주세요"
+            value={petAge}
+            onChange={handleAgeChange}
+          />
+          <div id="h1Wrapper">
+            <h1>애완동물의 종을 입력해 주세요.</h1>
+          </div>
+          <input
+            id="speciesInput"
+            type="text"
+            placeholder="종을 입력해 주세요"
+            value={petSpecies}
+            onChange={(e) => setPetSpecies(e.target.value)}
+          />
           <p>이전에 이미 검사하셨던 기록이 있어도 이전과 같이 입력해 주세요!</p>
           <button onClick={handleClick} id="diagnoseButton">
             진단받기
