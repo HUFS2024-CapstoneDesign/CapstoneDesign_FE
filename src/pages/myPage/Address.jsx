@@ -30,7 +30,7 @@ const Address = ({ initialAddress, updateAddress }) => {
           </>
         ) : (
           <>
-            <span style={{ fontSize: '20px' }}>{address}</span>
+            <span>{address}</span>
             <S.EditButton onClick={toggleEditAddress} isEditing={isEditingAddress}>수정</S.EditButton>
           </>
         )}
