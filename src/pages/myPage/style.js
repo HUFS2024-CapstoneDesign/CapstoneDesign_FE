@@ -99,9 +99,9 @@ S.PetRecordContainer = styled.div`
 
 S.PetRecord = styled.div`
   position: relative;
-  border: solid 2px #FF984D;
+  border: solid 3px #FF984D;
   border-radius: 50px;
-  padding: 10px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   gap: 10px;
