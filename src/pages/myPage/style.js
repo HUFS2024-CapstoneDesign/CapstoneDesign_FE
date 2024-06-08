@@ -4,7 +4,7 @@ const S = {};
 
 S.Background = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,11 @@ S.MainContainer = styled.div`
   align-items: center;
   gap: 30px;
   margin-right: 20%;
-  margin-top: 40%;
+  padding-top: 10%;
+  height: 100%;
+  @media (max-width: 727px) {
+    padding-top: 20%;
+  }
 `;
 
 S.ProfileNicknameContainer = styled.div`
@@ -50,6 +54,7 @@ S.IconOverlay = styled.div`
   border-radius: 50%;
 `;
 
+
 S.NicknameContainer = styled.div`
   display: flex;
   align-items: center;
@@ -61,6 +66,9 @@ S.NicknameContainer = styled.div`
 S.NicknameInput = styled.input`
   font-size: 20px;
   width: 200px;
+  @media (max-width: 727px) {
+    width: 100px;
+  }
 `;
 
 S.EditButton = styled.button`
@@ -81,6 +89,11 @@ S.AddressContainer = styled.div`
   margin-left: 15%;
   gap: 30px; 
   white-space: nowrap;
+  font-size: 20px;
+  @media (max-width: 727px) {
+    margin-left: 25%;
+    font-size: 16px;
+  }
 `;
 
 S.AddressInput = styled.input`
@@ -95,9 +108,14 @@ S.PetRecordContainer = styled.div`
   gap: 20px;
   position: relative;
   margin-left: 25%;
+  @media (max-width: 727px) {
+   grid-template-columns: 1fr;
+   margin-left: 35%;
+  }
 `;
 
 S.PetRecord = styled.div`
+  width: 300px;
   position: relative;
   border: solid 3px #FF984D;
   border-radius: 50px;
@@ -110,6 +128,9 @@ S.PetRecord = styled.div`
   text-align: left;
   font-size: ${({ theme }) => theme.FONT_SIZE["h4"]};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["regular"]};
+  @media (max-width: 727px) {
+   width: 300px;
+  }
 `;
 
 S.DeleteButton = styled.button`

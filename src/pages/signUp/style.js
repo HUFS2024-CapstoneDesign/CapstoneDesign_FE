@@ -137,11 +137,12 @@ S.PasswordContainer = styled.div`
 
 S.ButtonContainer = styled.div`
   display: flex;
-  width: 580px;
+  width: 550px;
   height: 100px;
   justify-content: space-between;
   position: relative;
-  margin-top: 30px;
+  margin-top: 5%;
+  margin-right : 10%;
 `;
 
 S.SubmitButton = styled.button`
@@ -170,7 +171,7 @@ S.CancleButton = styled.button`
 
 
 S.Image = styled.img`
-  width: 400px;
+  width: 450px;
   height: 200px;
   margin: 0 auto;
   @media (max-width: 727px) {
