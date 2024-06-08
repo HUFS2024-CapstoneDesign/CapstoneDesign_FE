@@ -54,7 +54,7 @@ const ChangePassword = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'token': `${token}`,
         },
         body: JSON.stringify({ password }),
       });

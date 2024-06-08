@@ -32,6 +32,7 @@ S.ProfileNicknameContainer = styled.div`
 S.ProfileContainer = styled.div`
   position: relative;
   cursor: pointer;
+  margin-left: 20%;
 `;
 
 S.ProfileImage = styled.img`
