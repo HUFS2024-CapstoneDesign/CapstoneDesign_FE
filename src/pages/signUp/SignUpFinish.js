@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const SignUpFinish = () => {
   return (
     <S.Background>
-      <S.Image src={logo}/>
+      <S.Image src={logo} alt='logo'/>
       <S.P>회원가입이 완료되었습니다 ! <br />
       로그인 이후 마이페이지로 이동하여 반려동물을 등록해주세요.</S.P>
       <NavLink to={'/login'}>

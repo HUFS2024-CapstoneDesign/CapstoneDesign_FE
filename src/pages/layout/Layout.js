@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <S.Background>
       <NavLink to={"/"}>
-        <S.Image src={logo} />
+        <S.Image src={logo} alt='logo'/>
       </NavLink>
       <Outlet />
     </S.Background>

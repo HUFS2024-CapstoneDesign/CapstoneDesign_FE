@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 const NotFound = () => {
   return (
     <S.Background>
-      <S.Image src={logo}/>
+      <S.Image src={logo} alt='logo'/>
       <S.H4>페이지를 찾을 수 없습니다.</S.H4>
       <NavLink to={'/'}>
       <Button size={"small"} variant={"main"} shape={"default"} color={"white"}>메인으로 돌아가기</Button>
