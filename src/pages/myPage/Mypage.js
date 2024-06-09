@@ -149,19 +149,28 @@ const Mypage = () => {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.isSuccess) {
-        const diagnosisList = ['결막염', '안검염', '각막부골편', '비궤양성각막염', '각막궤양'];
-  
+      if (data.isSuccess) { 
         const updatedPetRecords = data.data.map((pet, index) => {
-          const randomDiagnosis = diagnosisList[Math.floor(Math.random() * diagnosisList.length)];
-          const diagnosisDate = new Date();
-          diagnosisDate.setDate(diagnosisDate.getDate() - index);
-          const formattedDate = diagnosisDate.toISOString().split('T')[0];
-          return {
-            ...pet,
-            diagnosis: randomDiagnosis,
-            createdAt: formattedDate,
-          };
+          if (pet.name === '또리') {
+            const diagnosisDate = new Date();
+            const formattedDate = diagnosisDate.toISOString().split('T')[0];
+            return {
+              ...pet,
+              diagnosis: '결막염',
+              createdAt: formattedDate,
+            };
+          } else {
+            const diagnosisList = ['결막염', '안검염', '각막부골편', '비궤양성각막염', '각막궤양'];
+            const randomDiagnosis = diagnosisList[Math.floor(Math.random() * diagnosisList.length)];
+            const diagnosisDate = new Date();
+            diagnosisDate.setDate(diagnosisDate.getDate() - index);
+            const formattedDate = diagnosisDate.toISOString().split('T')[0];
+            return {
+              ...pet,
+              diagnosis: randomDiagnosis,
+              createdAt: formattedDate,
+            };
+          }
         });
   
         setPetRecords(updatedPetRecords.map(pet => ({
@@ -203,30 +212,6 @@ const Mypage = () => {
       setIsDeleting(false); 
     }
   };
-
-  // const handleDeleteRecord = async () => {
-  //   if (!isDeleting) {
-  //     setIsDeleting(true); 
-  //   } else {
-  //     if (selectedRecordIds.length > 0) {
-  //       try {
-  //         await Promise.all(selectedRecordIds.map(async (id) => {
-  //           const response = await fetch(`https://www.catchhealth.shop/api/v1/diagnosis/delete/${id}`, {
-  //             method: 'DELETE'
-  //           });
-  //           if (!response.ok) {
-  //             throw new Error('삭제 실패');
-  //           }
-  //         }));
-  //         setPetRecords(petRecords.filter(record => !selectedRecordIds.includes(record.id)));
-  //         setSelectedRecordIds([]);
-  //       } catch (error) {
-  //         console.error('삭제 중 오류 발생:', error);
-  //       }
-  //     }
-  //     setIsDeleting(false); 
-  //   }
-  // };
 
 
   //로그아웃
