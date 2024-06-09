@@ -39,13 +39,13 @@ S.P = styled.p`
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["regular"]};
   color: #000000;
   margin-top: 10%;
-  margin-left: 8%;
+  margin-left: 9%;
 `;
 
 S.FileInputLabel = styled.label`
   margin: 5% 8%;
   width: 25%;
-  height: 50%;
+  height: 45%;
   border: solid 5px ${({ theme }) => theme.PALETTE.primary["main_deep"]};
   border-radius: 50px;
   background-color: #EEEDED;
@@ -84,7 +84,7 @@ S.SubmitButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  margin-left: 10%;
+  margin-left: 11.4%;
   margin-bottom: 3%;
   pointer-events: ${({ isFileSelected }) => isFileSelected ? 'auto' : 'none'};
 `;
@@ -103,7 +103,7 @@ S.ExampleText = styled.div`
 S.RightText = styled.div`
   position: absolute;
   right: 3%;
-  top: 65%;
+  top: 53%;
   color: #000; 
   font-size: ${({ theme }) => theme.FONT_SIZE["h4"]};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
@@ -112,7 +112,7 @@ S.RightText = styled.div`
 S.WrongText = styled.div`
   position: absolute;
   right: 3%;
-  top: 115%;
+  top: 93%;
   color: #000; 
   font-size: ${({ theme }) => theme.FONT_SIZE["h4"]};
   font-weight: ${({ theme }) => theme.FONT_WEIGHT["semibold"]};
@@ -121,7 +121,7 @@ S.WrongText = styled.div`
 S.Image = styled.img`
   position: absolute;
   right: 20%;
-  top: 20%;
+  top: 16%;
   width: 25%;
   height: 35%;
   border: solid 5px ${maindeepColor};
@@ -131,23 +131,23 @@ S.Image = styled.img`
 S.Vector = styled.img`
   position: absolute;
   right: 38%;
-  top: 60%;
+  top: 53%;
   width: 7%;
-  height: 13%;
+  height: 12%;
 `
 
 S.VectorX = styled.img`
   position: absolute;
-  right: 40%;
-  top : 112%;
-  width: 5%;
+  right: 34%;
+  top : 89%;
+  width: 6%;
   height: 10%;
 `
 
 S.WrongImage = styled.img`
   position: absolute;
-  right: 5%;
-  top: 75%;
+  right: 2%;
+  top: 57%;
   width: 25%;
   height: 35%;
   border: solid 5px ${maindeepColor};
